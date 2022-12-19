@@ -16,25 +16,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/comment")
+@RequestMapping("/api")
 public class CommentController {
 
     private final CommentService commentService;
 
-    @PostMapping("/{postId}")
+    @PostMapping("/comment/{postId}")
     public CommentDto.ResponseDto createComment(@PathVariable Long postId, @Valid @RequestBody CommentDto.RequestDto requestDto,
         @AuthenticationPrincipal UserDetails userDetails) {   //UserDetails userDetails
         return commentService.createComment(postId, requestDto, userDetails);
     }
 
-    @PutMapping("/{postId}/{commentId}")
+    @PutMapping("/post/{postId}/comment/{commentId}")
     public CommentDto.ResponseDto updateComment(@PathVariable Long postId, @PathVariable Long commentId,
         @Valid @RequestBody CommentDto.RequestDto requestDto,
         @AuthenticationPrincipal UserDetails userDetails) { //UserDetails userDetails
         return commentService.updateComment(postId, commentId, requestDto, httpServletRequest);
     }
 
-    @DeleteMapping("/{commentId}")
+    @DeleteMapping("/comment/{commentId}")
     public MsgResponseDto deleteComment(@PathVariable Long commentId, @AuthenticationPrincipal UserDetails userDetails) { //UserDetails userDetails
         return commentService.deleteComment(commentId, httpServletRequest);
     }
