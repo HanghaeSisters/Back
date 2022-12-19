@@ -18,8 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Transactional
 public class CommentService {
-
-	private final PostRepository postRepository;
+	/*private final PostRepository postRepository;
 	private final CommentRepository commentRepository;
 
 	public CommentDto.ResponseDto createComment(Long postId, CommentDto.RequestDto requestDto,
@@ -74,5 +73,5 @@ public class CommentService {
 		return commentRepository.findById(commentId).orElseThrow(
 			() ->new CustomException(ErrorCode.NOT_FOUND_COMMENT)
 		);
-	}
+	}*/
 }

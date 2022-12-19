@@ -1,8 +1,10 @@
 package com.team6.hanghaesisters.controller;
 
+import ch.qos.logback.core.model.Model;
 import com.team6.hanghaesisters.dto.MsgResponseDto;
 import com.team6.hanghaesisters.dto.PostRequestDto;
 import com.team6.hanghaesisters.dto.PostResponseDto;
+import com.team6.hanghaesisters.dto.PostSampleResponseDto;
 import com.team6.hanghaesisters.entity.Post;
 import com.team6.hanghaesisters.service.PostService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,6 +13,8 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -27,14 +31,14 @@ public class PostController {
         return postService.create(postRequestDto, request);
     }
 
-    //글 수정
-    @PutMapping("/{id}")
+    //글 조회
+    @GetMapping("/{id}")
     public PostResponseDto readOnePost(@PathVariable Long id, HttpServletRequest request) {
         return postService.readOne(id, request);
     }
 
-    //글 조회
-    @GetMapping("/{id}")
+    //글 수정
+    @PutMapping("/{id}")
     public PostResponseDto updatePost(@PathVariable Long id, @RequestBody PostRequestDto postRequestDto, HttpServletRequest request){
         return postService.update(id, postRequestDto, request);
     }
@@ -44,6 +48,11 @@ public class PostController {
         return postService.delete(id, request);
     }
 
+//    @RequestParam
+    @GetMapping("/category")
+    public List<PostSampleResponseDto> readPostByCategory(@RequestParam("category") String category) {
+        return postService.readByCategory(category);
+    }
 }
 
 

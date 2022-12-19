@@ -41,8 +41,7 @@ public class Post extends TimeStamped {
     @Column(nullable = false)
     private String doctor;
 
-    public Post(PostRequestDto postRequestDto, Long id, String username) {
-        this.id = id;
+    public Post(PostRequestDto postRequestDto, String username) {
         this.username = username;
         this.title = postRequestDto.getTitle();
         this.category = postRequestDto.getCategory();
