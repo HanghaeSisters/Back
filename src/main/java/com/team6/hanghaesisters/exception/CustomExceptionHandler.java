@@ -13,7 +13,7 @@ public class CustomExceptionHandler {
 
 	//Custom Exception
 	@ExceptionHandler(value = {CustomException.class})
-	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
+	@ResponseStatus(code = HttpStatus.OK)
 	public ErrorResponseDto handleCustomException(CustomException ex) {
 		return new ErrorResponseDto(ex.getMsg(), ex.getStatusCode());
 	}
@@ -21,7 +21,7 @@ public class CustomExceptionHandler {
 
 	//Valid Exception
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
+	@ResponseStatus(code = HttpStatus.OK)
 	public ErrorResponseDto handleValidationExceptions(MethodArgumentNotValidException ex) {
 		BindingResult bindingResult = ex.getBindingResult();
 		StringBuilder sb = new StringBuilder();
