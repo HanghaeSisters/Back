@@ -7,11 +7,13 @@ import com.team6.hanghaesisters.entity.Post;
 import com.team6.hanghaesisters.service.PostService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/post")
+@Slf4j
 public class PostController {
 
     private final PostService postService;
@@ -19,6 +21,7 @@ public class PostController {
     //글 작성
     @PostMapping
     public PostResponseDto createPost(@RequestBody PostRequestDto postRequestDto, HttpServletRequest request){
+        log.info("controller-createPost메소드 실행 완");
         return postService.create(postRequestDto, request);
     }
 

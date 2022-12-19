@@ -1,5 +1,7 @@
 package com.team6.hanghaesisters.entity;
 
+import com.team6.hanghaesisters.dto.PostRequestDto;
+import com.team6.hanghaesisters.dto.PostResponseDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +13,9 @@ public class Post extends TimeStamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
+    private String username;
 
     @Column(nullable = false)
     private String title;
@@ -35,4 +40,28 @@ public class Post extends TimeStamped {
 
     @Column(nullable = false)
     private String doctor;
+
+    public Post(PostRequestDto postRequestDto, Long id, String username) {
+        this.id = id;
+        this.username = username;
+        this.title = postRequestDto.getTitle();
+        this.category = postRequestDto.getCategory();
+        this.imageBefore = postRequestDto.getImageBefore();
+        this.imageAfter = postRequestDto.getImageAfter();
+        this.content = postRequestDto.getContent();
+        this.price = postRequestDto.getPrice();
+        this.hospitalAddress = postRequestDto.getHospitalAddress();
+        this.doctor = postRequestDto.getDoctor();
+    }
+
+    public void update(PostRequestDto postRequestDto) {
+        this.title = postRequestDto.getTitle();
+        this.category = postRequestDto.getCategory();
+        this.imageBefore = postRequestDto.getImageBefore();
+        this.imageAfter = postRequestDto.getImageAfter();
+        this.content = postRequestDto.getContent();
+        this.price = postRequestDto.getPrice();
+        this.hospitalAddress = postRequestDto.getHospitalAddress();
+        this.doctor = postRequestDto.getDoctor();
+    }
 }
