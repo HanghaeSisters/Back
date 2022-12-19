@@ -42,6 +42,8 @@ dependencies {
     // 스프링 시큐리티
     implementation 'org.springframework.boot:spring-boot-starter-security'
 
+    //AOP
+    implementation group: 'org.springframework', name: 'spring-aop', version: '5.3.22'
 }
 
 tasks.named('test') {
