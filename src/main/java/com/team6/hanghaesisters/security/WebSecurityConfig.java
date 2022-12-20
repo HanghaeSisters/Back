@@ -48,7 +48,7 @@ public class WebSecurityConfig {
 //                        .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/api/user/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/posts").permitAll()
-                        .requestMatchers(HttpMethod.GET,"/api/posts/{\\d+}").permitAll()
+//                        .requestMatchers(HttpMethod.GET,"/api/posts/{\\d+}").permitAll()
                         .anyRequest().authenticated());
         http
                 .logout()
