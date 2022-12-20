@@ -1,7 +1,6 @@
 package com.team6.hanghaesisters.entity;
 
 import com.team6.hanghaesisters.dto.PostRequestDto;
-import com.team6.hanghaesisters.dto.PostResponseDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,16 +40,22 @@ public class Post extends TimeStamped {
     @Column(nullable = false)
     private String doctor;
 
-    public Post(PostRequestDto postRequestDto, String username) {
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    public Post(User user, String username, String title, String category, String imageBefore, String imageAfter,
+                String content, int price, String hospitalAddress, String doctor) {
         this.username = username;
-        this.title = postRequestDto.getTitle();
-        this.category = postRequestDto.getCategory();
-        this.imageBefore = postRequestDto.getImageBefore();
-        this.imageAfter = postRequestDto.getImageAfter();
-        this.content = postRequestDto.getContent();
-        this.price = postRequestDto.getPrice();
-        this.hospitalAddress = postRequestDto.getHospitalAddress();
-        this.doctor = postRequestDto.getDoctor();
+        this.title = title;
+        this.category = category;
+        this.imageBefore = imageBefore;
+        this.imageAfter = imageAfter;
+        this.content = content;
+        this.price = price;
+        this.hospitalAddress = hospitalAddress;
+        this.doctor = doctor;
+        this.user = user;
     }
 
     public void update(PostRequestDto postRequestDto) {

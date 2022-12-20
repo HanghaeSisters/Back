@@ -6,10 +6,13 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Getter
 @NoArgsConstructor
-@Entity(name = "USERS")
+@Entity(name = "Users")
 public class User {
 
     @Id
@@ -26,6 +29,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private UserRole role;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Post> post = new ArrayList<>();
 
     @Builder
     public User(String username, String password) {

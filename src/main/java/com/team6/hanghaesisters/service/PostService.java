@@ -4,6 +4,7 @@ import com.team6.hanghaesisters.dto.MsgResponseDto;
 import com.team6.hanghaesisters.dto.PostRequestDto;
 import com.team6.hanghaesisters.dto.PostResponseDto;
 import com.team6.hanghaesisters.dto.PostSampleResponseDto;
+import com.team6.hanghaesisters.dto.post.PostDto;
 import com.team6.hanghaesisters.entity.Post;
 import com.team6.hanghaesisters.entity.User;
 import com.team6.hanghaesisters.exception.CustomException;
@@ -26,13 +27,13 @@ import java.util.List;
 public class PostService {
     private final PostRepository postRepository;
     private final ExceptionFunctions exceptionFunctions;
+    private final UserRepository userRepository;
 
     @Transactional
-    public PostResponseDto create(PostRequestDto postRequestDto, User user) {
-        log.info("PostService create() 실행 완");
-
-        Post post = postRepository.saveAndFlush(new Post(postRequestDto, user.getUsername()));
-        return new PostResponseDto(post);
+    public PostDto.DetailResDto create(Long userId, PostDto.CreateReqDto dto) {
+        User user = getUserByIdIfExists(userId);
+        Post post = dto.toEntity(user);
+        return new PostDto.DetailResDto(postRepository.save(post));
     }
 
     @Transactional
@@ -81,5 +82,12 @@ public class PostService {
         }
 
         return postSampleResponseDtoList;
+    }
+
+    private User getUserByIdIfExists(Long userId) {
+
+        return userRepository.findById(userId).orElseThrow(
+                () -> new IllegalArgumentException("존재하지 않는 회원입니다")
+        );
     }
 }

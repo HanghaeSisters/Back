@@ -4,12 +4,20 @@ import com.team6.hanghaesisters.dto.MsgResponseDto;
 import com.team6.hanghaesisters.dto.PostRequestDto;
 import com.team6.hanghaesisters.dto.PostResponseDto;
 import com.team6.hanghaesisters.dto.PostSampleResponseDto;
+import com.team6.hanghaesisters.dto.post.PostDto;
+import com.team6.hanghaesisters.entity.User;
 import com.team6.hanghaesisters.security.UserDetailsImpl;
+import com.team6.hanghaesisters.security.UserDetailsServiceImpl;
 import com.team6.hanghaesisters.service.PostService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,11 +30,11 @@ public class PostController {
     private final PostService postService;
 
     //글 작성
-    @PostMapping("")
-    public PostResponseDto createPost(@RequestBody PostRequestDto postRequestDto,
-                                      @AuthenticationPrincipal UserDetailsImpl userDetails){
-        log.info("UserDetails:" + userDetails);
-        return postService.create(postRequestDto, userDetails.getUser());
+    @PostMapping
+    public ResponseEntity<PostDto.DetailResDto> create(@Valid @RequestBody PostDto.CreateReqDto dto,
+                                                       @AuthenticationPrincipal UserDetails userDetails){
+        PostDto.DetailResDto resDto = postService.create(Long.parseLong(userDetails.getUsername()), dto);
+        return ResponseEntity.ok(resDto);
     }
 
     //글 조회
