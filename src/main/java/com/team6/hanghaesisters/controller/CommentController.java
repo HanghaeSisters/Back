@@ -26,18 +26,21 @@ public class CommentController {
     @PostMapping("/comment/{postId}")
     public CommentDto.ResponseDto createComment(@PathVariable Long postId, @Valid @RequestBody CommentDto.RequestDto requestDto,
         @AuthenticationPrincipal UserDetails userDetails) {   //UserDetails
-        return commentService.createComment(postId, requestDto, userDetails);
+//        return commentService.createComment(postId, requestDto, userDetails);
+        return null;
     }
 
     @PutMapping("/post/{postId}/comment/{commentId}")
     public CommentDto.ResponseDto updateComment(@PathVariable Long postId, @PathVariable Long commentId,
         @Valid @RequestBody CommentDto.RequestDto requestDto,
         @AuthenticationPrincipal UserDetails userDetails) { //UserDetails
-        return commentService.updateComment(postId, commentId, requestDto, userDetails);
+//        return commentService.updateComment(postId, commentId, requestDto, userDetails);
+        return null;
     }
 
     @DeleteMapping("/comment/{commentId}")
     public MsgResponseDto deleteComment(@PathVariable Long commentId, @AuthenticationPrincipal UserDetails userDetails) { //UserDetails
-        return commentService.deleteComment(commentId, userDetails);
+//        return commentService.deleteComment(commentId, userDetails);
+        return null;
     }
 }
