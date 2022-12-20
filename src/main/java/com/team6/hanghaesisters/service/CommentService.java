@@ -8,7 +8,6 @@ import com.team6.hanghaesisters.exception.CustomException;
 import com.team6.hanghaesisters.exception.ErrorCode;
 import com.team6.hanghaesisters.repository.CommentRepository;
 import com.team6.hanghaesisters.repository.PostRepository;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -25,33 +24,38 @@ public class CommentService {
 	public CommentDto.ResponseDto createComment(Long postId, CommentDto.RequestDto requestDto,
 		User user) {
 
+		//게시글 존재여부 확인
 		checkPost(postId);
 
-		Comment comment = new Comment();  //commentRequestDto.getContent(), postId, userId -> 매개 변수
+		Comment comment = new Comment(requestDto.content(), postId, user.getId());
 		commentRepository.save(comment);
 
-		return new CommentDto.ResponseDto(comment);    //String username
-		return null;
+		return new CommentDto.ResponseDto(comment, user.getUsername());
 	}
 
 	public CommentDto.ResponseDto updateComment(Long postId, Long commentId,
-		CommentDto.RequestDto requestDto,
-		User user) {
+		CommentDto.RequestDto requestDto, User user) {
 
+		//게시글 존재여부 확인
 		checkPost(postId);
+
+		//댓글 존재여부 확인 후 가져오기
 		Comment comment = getCommentByIdIfExists(commentId);
-		checkOwner(comment);  //user.getUserId();
+
+		//댓글 작성자가 맞는지 확인
+		checkOwner(comment, user.getId());
 
 		comment.update(requestDto.content());
 
-		return new CommentDto.ResponseDto(comment);   //String username
-
-		return null;
+		return new CommentDto.ResponseDto(comment, user.getUsername());
 	}
 
 	public MsgResponseDto deleteComment(Long commentId, User user) {
+		//댓글 존재여부 확인 후 가져오기
 		Comment comment = getCommentByIdIfExists(commentId);
-//		checkOwner(comment, userId);
+
+		//댓글 작성자가 맞는지 확인
+		checkOwner(comment, user.getId());
 
 		commentRepository.deleteById(commentId);
 
@@ -72,7 +76,7 @@ public class CommentService {
 
 	private Comment getCommentByIdIfExists(Long commentId) {
 		return commentRepository.findById(commentId).orElseThrow(
-			() ->new CustomException(ErrorCode.NOT_FOUND_COMMENT)
+			() -> new CustomException(ErrorCode.NOT_FOUND_COMMENT)
 		);
 	}
 }
