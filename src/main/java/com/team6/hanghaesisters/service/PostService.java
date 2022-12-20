@@ -183,30 +183,38 @@ public class PostService {
     private final ExceptionFunctions exceptionFunctions;
 
     @Transactional
-    public PostResponseDto create(PostRequestDto postRequestDto, User user) {
-        log.info("PostService create() 실행 완");
-
-        Post post = postRepository.saveAndFlush(new Post(postRequestDto, user.getUsername()));
-        return new PostResponseDto(post);
+    public create(PostRequestDto requestDto, String user) {
+        Post post = new Post(requestDto, user.());
+        post = postRepository.save(post);
+        post.setUser(user);
+        return new CommentDto.PostResponseDto(post);
     }
 
+//    @Transactional
+//    public PostResponseDto create(PostRequestDto postRequestDto, User user) {
+//        log.info("PostService create() 실행 완");
+//
+//        Post post = postRepository.saveAndFlush(new Post(postRequestDto, user.getUsername()));
+//        return new PostResponseDto(post);
+//    }
+
     @Transactional
-    public PostResponseDto readOne(Long id, User user) {
+    public CommentDto.PostResponseDto readOne(Long id, User user) {
         Post post = postRepository.findById(id).orElseThrow(
                 () -> new CustomException(ErrorCode.NOT_FOUND_POST)
         );
-        return new PostResponseDto(post);
+        return new CommentDto.PostResponseDto(post);
     }
 
     @Transactional
-    public PostResponseDto update(Long id, PostRequestDto postRequestDto, User user) {
+    public CommentDto.PostResponseDto update(Long id, PostRequestDto postRequestDto, User user) {
         exceptionFunctions.checkPost(id);
 
         Post post = postRepository.findByIdAndUsername(id, user.getUsername()).orElseThrow(
                 () -> new CustomException(ErrorCode.UNAVAILABLE_MODIFICATION)
         );
         post.update(postRequestDto);
-        return new PostResponseDto(post);
+        return new CommentDto.PostResponseDto(post);
     }
 
     @Transactional
@@ -238,4 +246,3 @@ public class PostService {
         return postSampleResponseDtoList;
     }
 }
->>>>>>> 6b5131438b1804d6691c09a45c57afd9a25bd20a

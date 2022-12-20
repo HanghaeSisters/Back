@@ -1,10 +1,10 @@
-package com.team6.hanghaesisters.dto;
+package com.team6.hanghaesisters.dto.post;
 
 import com.team6.hanghaesisters.entity.Post;
 import lombok.Getter;
 
 @Getter
-public class PostResponseDto {
+public static class PostResponseDto {
     private Long id;
     //httpHeader
     private String username;
@@ -16,7 +16,7 @@ public class PostResponseDto {
     private int price;
     private String hospitalAddress;
     private String doctor;
-//    private String msg;
+    //    private String msg;
 
     public PostResponseDto(Post post) {
         this.id = post.getId();
@@ -31,3 +31,4 @@ public class PostResponseDto {
         this.doctor = post.getDoctor();
     }
 }
+
