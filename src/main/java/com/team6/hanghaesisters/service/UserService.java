@@ -1,9 +1,14 @@
 package com.team6.hanghaesisters.service;
 
-import com.team6.hanghaesisters.dto.*;
-import com.team6.hanghaesisters.security.jwt.JwtUtil;
+import com.team6.hanghaesisters.dto.MsgResponseDto;
+import com.team6.hanghaesisters.dto.UserDto;
+import com.team6.hanghaesisters.exception.CustomException;
+import com.team6.hanghaesisters.exception.ErrorCode;
 import com.team6.hanghaesisters.repository.UserRepository;
+import com.team6.hanghaesisters.security.jwt.JwtUtil;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
@@ -19,25 +24,30 @@ public class UserService {
     private final JwtUtil jwtUtil;
 
 
-    public void signup(UserDto.SignupReqDto dto) {
+    public MsgResponseDto signup(UserDto.SignupReqDto dto) {
         userRepository.save(dto.toEntity());
+        return new MsgResponseDto("회원가입 되었습니다.", HttpStatus.OK.value());
     }
 
-    public String login(UserDto.LoginReqDto dto){
-
-        //인증 객체(인증 토큰)을 직접 만들어 인증을 진행합니다.
-        //아직 인증 전 객체입니다.
+    public MsgResponseDto login(UserDto.LoginReqDto dto, HttpServletResponse httpServletResponse){
+        //아직 인증 전 객체
         UsernamePasswordAuthenticationToken beforeAuthentication = new UsernamePasswordAuthenticationToken(dto.username(), dto.password());
 
-        //authenticationManager에게 인증을 요청하고, authenticationProvider에게 인증을 위임하여
-        // authenticationProvider에서 인증 진행 후 인증 완료된 인증 객체를 받습니다.
+        //인증 완료된 인증 객체
         Authentication afterAuthentication = authenticationManagerBuilder.getObject().authenticate(beforeAuthentication);
 
-        //인증 완료된 객체로 JWT를 생성합니다.
-        return jwtUtil.generateToken(afterAuthentication);
+        //인증 완료된 객체로 JWT 생성
+        httpServletResponse.addHeader(JwtUtil.AUTHORIZATION_HEADER, jwtUtil.generateToken(afterAuthentication));
+
+        return new MsgResponseDto("로그인 되었습니다.", HttpStatus.OK.value());
     }
 
-    public boolean existsByUsername(String username) {
-        return userRepository.existsByUsername(username);
+    public MsgResponseDto checkIdDuplication(String username) {
+
+        if (userRepository.existsByUsername(username)) {
+            throw new CustomException(ErrorCode.OVERLAP_USERID);
+        }
+
+        return new MsgResponseDto("사용 가능한 아이디입니다.", HttpStatus.OK.value());
     }
 }
