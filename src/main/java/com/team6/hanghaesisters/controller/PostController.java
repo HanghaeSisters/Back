@@ -4,11 +4,11 @@ import com.team6.hanghaesisters.dto.MsgResponseDto;
 import com.team6.hanghaesisters.dto.PostRequestDto;
 import com.team6.hanghaesisters.dto.PostResponseDto;
 import com.team6.hanghaesisters.dto.PostSampleResponseDto;
-import com.team6.hanghaesisters.security.UserDetailsImpl;
 import com.team6.hanghaesisters.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,28 +23,28 @@ public class PostController {
     //글 작성
     @PostMapping("")
     public PostResponseDto createPost(@RequestBody PostRequestDto postRequestDto,
-                                      @AuthenticationPrincipal UserDetailsImpl userDetails){
+                                      @AuthenticationPrincipal UserDetails userDetails){
         log.info("UserDetails:" + userDetails);
-        return postService.create(postRequestDto, userDetails.getUser());
+        return postService.create(postRequestDto, Long.parseLong(userDetails.getUsername()));
     }
 
     //글 조회
     @GetMapping("/{id}")
     public PostResponseDto readOnePost(@PathVariable Long id,
-                                       @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        return postService.readOne(id, userDetails.getUser());
+                                       @AuthenticationPrincipal UserDetails userDetails) {
+        return postService.readOne(id, Long.parseLong(userDetails.getUsername()));
     }
 
     //글 수정
     @PutMapping("/{id}")
     public PostResponseDto updatePost(@PathVariable Long id, @RequestBody PostRequestDto postRequestDto,
-                                      @AuthenticationPrincipal UserDetailsImpl userDetails){
-        return postService.update(id, postRequestDto, userDetails.getUser());
+                                      @AuthenticationPrincipal UserDetails userDetails){
+        return postService.update(id, postRequestDto, Long.parseLong(userDetails.getUsername()));
     }
     //글 삭제
     @DeleteMapping("/{id}")
-    public MsgResponseDto deletePost(@PathVariable Long id, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        return postService.delete(id, userDetails.getUser());
+    public MsgResponseDto deletePost(@PathVariable Long id, @AuthenticationPrincipal UserDetails userDetails){
+        return postService.delete(id, Long.parseLong(userDetails.getUsername()));
     }
 
 //    @RequestParam
