@@ -5,7 +5,6 @@ import com.team6.hanghaesisters.dto.PostRequestDto;
 import com.team6.hanghaesisters.dto.PostResponseDto;
 import com.team6.hanghaesisters.entity.Post;
 import com.team6.hanghaesisters.entity.User;
-import com.team6.hanghaesisters.entity.UserRoleEnum;
 import com.team6.hanghaesisters.jwt.JwtUtil;
 import com.team6.hanghaesisters.repository.PostRepository;
 import com.team6.hanghaesisters.repository.UserRepository;
@@ -14,9 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
 
 @Service
 @RequiredArgsConstructor
