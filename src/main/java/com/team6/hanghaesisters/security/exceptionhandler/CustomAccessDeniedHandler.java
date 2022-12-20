@@ -1,16 +1,17 @@
 package com.team6.hanghaesisters.security.exceptionhandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.team6.hanghaesisters.dto.ErrorResponse;
+import com.team6.hanghaesisters.dto.ErrorResponseDto;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.AccessDeniedException;
-
 import java.io.IOException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 @RequiredArgsConstructor
-public class CustomAccessDeniedHandler implements org.springframework.security.web.access.AccessDeniedHandler {
+public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
     private final ObjectMapper om;
 
@@ -28,13 +29,13 @@ public class CustomAccessDeniedHandler implements org.springframework.security.w
                 ? CUSTOM_DEFAULT_ERROR_MSG
                 : accessDeniedException.getMessage();
 
-        ErrorResponse errorResponse = new ErrorResponse(errorMsg);
+        ErrorResponseDto errorResponse = new ErrorResponseDto(errorMsg, HttpStatus.FORBIDDEN.value());
 
         String result = om.writeValueAsString(errorResponse);
 
         response.getWriter().write(result);
 
-        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        response.setStatus(HttpStatus.FORBIDDEN.value());
     }
 }
 

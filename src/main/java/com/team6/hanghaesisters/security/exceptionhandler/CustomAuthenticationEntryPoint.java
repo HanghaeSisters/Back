@@ -1,14 +1,14 @@
 package com.team6.hanghaesisters.security.exceptionhandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.team6.hanghaesisters.dto.ErrorResponse;
+import com.team6.hanghaesisters.dto.ErrorResponseDto;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
-
-import java.io.IOException;
 
 @RequiredArgsConstructor
 public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
@@ -30,13 +30,13 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
             errorMsg = CUSTOM_DEFAULT_ERROR_MSG;
         }
 
-        ErrorResponse errorResponse = new ErrorResponse(errorMsg);
+        ErrorResponseDto errorResponse = new ErrorResponseDto(errorMsg, HttpStatus.UNAUTHORIZED.value());
 
         String result = om.writeValueAsString(errorResponse);
 
         response.getWriter().write(result);
 
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setStatus(HttpStatus.UNAUTHORIZED.value());
     }
 }
 

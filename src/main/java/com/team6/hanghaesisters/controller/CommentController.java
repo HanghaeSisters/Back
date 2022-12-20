@@ -2,11 +2,11 @@ package com.team6.hanghaesisters.controller;
 
 import com.team6.hanghaesisters.dto.CommentDto;
 import com.team6.hanghaesisters.dto.MsgResponseDto;
-import com.team6.hanghaesisters.security.UserDetailsImpl;
 import com.team6.hanghaesisters.service.CommentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,19 +24,19 @@ public class CommentController {
 
     @PostMapping("/comment/{postId}")
     public CommentDto.ResponseDto createComment(@PathVariable Long postId, @Valid @RequestBody CommentDto.RequestDto requestDto,
-        @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        return commentService.createComment(postId, requestDto, userDetails.getUser());
+        @AuthenticationPrincipal UserDetails userDetails) {
+        return commentService.createComment(postId, requestDto, Long.parseLong(userDetails.getUsername()));
     }
 
     @PutMapping("/post/{postId}/comment/{commentId}")
     public CommentDto.ResponseDto updateComment(@PathVariable Long postId, @PathVariable Long commentId,
         @Valid @RequestBody CommentDto.RequestDto requestDto,
-        @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        return commentService.updateComment(postId, commentId, requestDto, userDetails.getUser());
+        @AuthenticationPrincipal UserDetails userDetails) {
+        return commentService.updateComment(postId, commentId, requestDto, Long.parseLong(userDetails.getUsername()));
     }
 
     @DeleteMapping("/comment/{commentId}")
-    public MsgResponseDto deleteComment(@PathVariable Long commentId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        return commentService.deleteComment(commentId, userDetails.getUser());
+    public MsgResponseDto deleteComment(@PathVariable Long commentId, @AuthenticationPrincipal UserDetails userDetails) {
+        return commentService.deleteComment(commentId, Long.parseLong(userDetails.getUsername()));
     }
 }

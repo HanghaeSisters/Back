@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -27,6 +28,7 @@ public class Comment extends TimeStamped {
     @Column(nullable = false)
     private String content;
 
+    @Builder
     public Comment(String content, Long postId, Long userId) {
         this.content = content;
         this.postId = postId;
