@@ -6,7 +6,6 @@ import com.team6.hanghaesisters.dto.PostResponseDto;
 import com.team6.hanghaesisters.dto.PostSampleResponseDto;
 import com.team6.hanghaesisters.security.UserDetailsImpl;
 import com.team6.hanghaesisters.service.PostService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
