@@ -1,5 +1,6 @@
 package com.team6.hanghaesisters.entity;
 
+import com.team6.hanghaesisters.util.PasswordEncConverter;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-@Entity(name = "User")
+@Entity(name = "USERS")
 public class User {
 
     @Id
@@ -18,17 +19,18 @@ public class User {
     @Column(nullable = false, unique = true)
     private String username;
 
+    @Convert(converter = PasswordEncConverter.class)
     @Column(nullable = false)
     private String password;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private UserRoleEnum role;
+    private UserRole role;
 
     @Builder
-    public User(String username, String password, UserRoleEnum role) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.role = role;
+        this.role = UserRole.USER;
     }
 }
