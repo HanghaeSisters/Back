@@ -11,10 +11,10 @@ public class CommentDto {
 							 String content) {
 	}
 
-	public record ResponseDto(Long commentId, String content, String username) {
+	public record ResponseDto(Long commentId, String username,  String content) {
 
-		public ResponseDto(Comment comment, String username) {
-			this(comment.getId(), comment.getContent(), username);
+		public ResponseDto(String username, Comment comment) {
+			this(comment.getId(), username, comment.getContent());
 		}
 	}
 }
