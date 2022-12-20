@@ -21,7 +21,7 @@ import java.util.List;
 @RequestMapping("/api/post")
 @Slf4j
 public class PostController {
-
+/*
     private final PostService postService;
 
     //글 작성
@@ -53,6 +53,8 @@ public class PostController {
     public List<PostSampleResponseDto> readPostByCategory(@RequestParam("category") String category) {
         return postService.readByCategory(category);
     }
+
+    */
 }
 
 

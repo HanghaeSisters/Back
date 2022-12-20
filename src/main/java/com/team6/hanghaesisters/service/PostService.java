@@ -6,10 +6,10 @@ import com.team6.hanghaesisters.dto.PostResponseDto;
 import com.team6.hanghaesisters.dto.PostSampleResponseDto;
 import com.team6.hanghaesisters.entity.Post;
 import com.team6.hanghaesisters.entity.User;
-import com.team6.hanghaesisters.entity.UserRoleEnum;
-import com.team6.hanghaesisters.exception.CustomException;
-import com.team6.hanghaesisters.exception.ErrorCode;
-import com.team6.hanghaesisters.jwt.JwtUtil;
+//import com.team6.hanghaesisters.entity.UserRoleEnum;
+//import com.team6.hanghaesisters.exception.CustomException;
+//import com.team6.hanghaesisters.exception.ErrorCode;
+//import com.team6.hanghaesisters.jwt.JwtUtil;
 import com.team6.hanghaesisters.repository.PostRepository;
 import com.team6.hanghaesisters.repository.UserRepository;
 import io.jsonwebtoken.Claims;
@@ -28,7 +28,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class PostService {
-
+/*
     private final PostRepository postRepository;
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
@@ -170,4 +170,5 @@ public class PostService {
 
         return postSampleResponseDtoList;
     }
+ */
 }
