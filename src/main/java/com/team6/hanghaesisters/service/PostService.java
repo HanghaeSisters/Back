@@ -45,7 +45,10 @@ public class PostService {
         Post post = postRepository.findById(id).orElseThrow(
                 () -> new CustomException(ErrorCode.NOT_FOUND_POST)
         );
-        return new PostResponseDto(post);
+
+        List<Comment> comments = commentRepository.findAllByPostId(id);
+
+        return new PostResponseDto(post, comments);
     }
 
     @Transactional
@@ -71,6 +74,7 @@ public class PostService {
         checkOwner(post, user.getUsername());
 
         postRepository.deleteByIdAndUsername(id, user.getUsername());
+        commentRepository.deleteAllByPostId(id);
         return new MsgResponseDto("게시글 삭제 성공!!", HttpStatus.OK.value());
     }
 
