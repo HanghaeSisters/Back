@@ -14,6 +14,7 @@ import com.team6.hanghaesisters.repository.PostRepository;
 import com.team6.hanghaesisters.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,7 +47,7 @@ public class PostService {
                 () -> new CustomException(ErrorCode.NOT_FOUND_POST)
         );
 
-        List<Comment> comments = commentRepository.findAllByPostId(id);
+        List<Comment> comments = commentRepository.findAllByPostId(Sort.by(Sort.Direction.DESC, "created_at"), id);
 
         return new PostResponseDto(post, comments);
     }
