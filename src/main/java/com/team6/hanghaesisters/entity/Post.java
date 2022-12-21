@@ -1,14 +1,10 @@
 package com.team6.hanghaesisters.entity;
 
 import com.team6.hanghaesisters.dto.PostRequestDto;
-import com.team6.hanghaesisters.dto.PostResponseDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @NoArgsConstructor
