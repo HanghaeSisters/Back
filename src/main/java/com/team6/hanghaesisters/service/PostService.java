@@ -4,22 +4,19 @@ import com.team6.hanghaesisters.dto.MsgResponseDto;
 import com.team6.hanghaesisters.dto.PostRequestDto;
 import com.team6.hanghaesisters.dto.PostResponseDto;
 import com.team6.hanghaesisters.dto.PostSampleResponseDto;
+import com.team6.hanghaesisters.entity.Comment;
 import com.team6.hanghaesisters.entity.Post;
 import com.team6.hanghaesisters.entity.User;
-//import com.team6.hanghaesisters.entity.UserRoleEnum;
-//import com.team6.hanghaesisters.exception.CustomException;
-//import com.team6.hanghaesisters.exception.ErrorCode;
-//import com.team6.hanghaesisters.jwt.JwtUtil;
+import com.team6.hanghaesisters.exception.CustomException;
+import com.team6.hanghaesisters.exception.ErrorCode;
+import com.team6.hanghaesisters.repository.CommentRepository;
 import com.team6.hanghaesisters.repository.PostRepository;
 import com.team6.hanghaesisters.repository.UserRepository;
-import io.jsonwebtoken.Claims;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,132 +25,60 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class PostService {
-/*
     private final PostRepository postRepository;
+    private final CommentRepository commentRepository;
     private final UserRepository userRepository;
-    private final JwtUtil jwtUtil;
 
     @Transactional
-    public PostResponseDto create(PostRequestDto postRequestDto, HttpServletRequest request) {
+    public PostResponseDto create(PostRequestDto postRequestDto, Long userId) {
         log.info("PostService create() 실행 완");
-        String token = jwtUtil.resolveToken(request);
-        Claims claims;
 
-        // 토큰이 있는 경우에만 관심상품 추가 가능
-        if (token != null) {
-            if (jwtUtil.validateToken(token)) {
-                // 토큰에서 사용자 정보 가져오기
-                claims = jwtUtil.getUserInfoFromToken(token);
-            } else {
-                throw new CustomException(ErrorCode.INVALID_TOKEN);
-            }
+        User user = getUserByIdIfExists(userId);
+        Post post = postRepository.saveAndFlush(new Post(postRequestDto, user.getUsername()));
+        return new PostResponseDto(post);
+    }
 
-            // 토큰에서 가져온 사용자 정보를 사용하여 DB 조회
-            User user = userRepository.findByUsername(claims.getSubject()).orElseThrow(
-                    () -> new CustomException(ErrorCode.USER_NOT_FOUND)
-            );
+    @Transactional(readOnly = true)
+    public PostResponseDto readOne(Long id, Long userId) {
+        checkUser(userId);
 
-            // 요청받은 DTO 로 DB에 저장할 객체 만들기
-            Post post = postRepository.saveAndFlush(new Post(postRequestDto, user.getUsername()));
+        Post post = postRepository.findById(id).orElseThrow(
+                () -> new CustomException(ErrorCode.NOT_FOUND_POST)
+        );
 
-            return new PostResponseDto(post);
-        } else {
-            return null;
-        }
+        List<Comment> comments = commentRepository.findAllByPostId(id);
+
+        return new PostResponseDto(post, comments);
     }
 
     @Transactional
-    public PostResponseDto readOne(Long id, HttpServletRequest request) {
-        // Request에서 Token 가져오기
-        String token = jwtUtil.resolveToken(request);
-        Claims claims;
+    public PostResponseDto update(Long id, PostRequestDto postRequestDto, Long userId) {
+        checkPost(id);
 
-        // 토큰이 있는 경우에만 관심상품 조회 가능
-        if (token != null) {
-            // Token 검증
-            if (jwtUtil.validateToken(token)) {
-                claims = jwtUtil.getUserInfoFromToken(token);
-            } else {
-                throw new CustomException(ErrorCode.INVALID_TOKEN);
-            }
+        User user = getUserByIdIfExists(userId);
 
-            User user = userRepository.findByUsername(claims.getSubject()).orElseThrow(
-                    () -> new CustomException(ErrorCode.USER_NOT_FOUND)
-            );
-
-            Post post = postRepository.findById(id).orElseThrow(
-                    () -> new CustomException(ErrorCode.NOT_FOUND_POST)
-            );
-
-            return new PostResponseDto(post);
-
-        } else {
-            return null;
-        }
+        Post post = postRepository.findByIdAndUsername(id, user.getUsername()).orElseThrow(
+                () -> new CustomException(ErrorCode.UNAVAILABLE_MODIFICATION)
+        );
+        post.update(postRequestDto);
+        return new PostResponseDto(post);
     }
 
     @Transactional
-    public PostResponseDto update(Long id, PostRequestDto postRequestDto,
-                                  HttpServletRequest request) {
-        // Request에서 Token 가져오기
-        String token = jwtUtil.resolveToken(request);
-        Claims claims;
+    public MsgResponseDto delete(Long id, Long userId) {
+        checkPost(id);
 
-        // 토큰이 있는 경우에만 관심상품 조회 가능
-        if (token != null) {
-            // Token 검증
-            if (jwtUtil.validateToken(token)) {
-                claims = jwtUtil.getUserInfoFromToken(token);
-            } else {
-                throw new CustomException(ErrorCode.INVALID_TOKEN);
-            }
+        User user = getUserByIdIfExists(userId);
 
-            // 토큰에서 가져온 사용자 정보를 사용하여 DB 조회
-            User user = userRepository.findByUsername(claims.getSubject()).orElseThrow(
-                    () -> new CustomException(ErrorCode.USER_NOT_FOUND)
-            );
+        Post post = postRepository.getReferenceById(id);
+        checkOwner(post, user.getUsername());
 
-            Post post = postRepository.findByIdAndUsername(id, user.getUsername()).orElseThrow(
-                    () -> new CustomException(ErrorCode.UNAVAILABLE_MODIFICATION)
-            );
-            post.update(postRequestDto);
-            return new PostResponseDto(post);
-        } else {
-            return null;
-        }
+        postRepository.deleteByIdAndUsername(id, user.getUsername());
+        commentRepository.deleteAllByPostId(id);
+        return new MsgResponseDto("게시글 삭제 성공!!", HttpStatus.OK.value());
     }
 
-    @Transactional
-    public MsgResponseDto delete(Long id, HttpServletRequest request) {
-        // Request에서 Token 가져오기
-        String token = jwtUtil.resolveToken(request);
-        Claims claims;
-
-        // 토큰이 있는 경우에만 관심상품 조회 가능
-        if (token != null) {
-            // Token 검증
-            if (jwtUtil.validateToken(token)) {
-                claims = jwtUtil.getUserInfoFromToken(token);
-            } else {
-                throw new CustomException(ErrorCode.INVALID_TOKEN);
-            }
-
-            // 토큰에서 가져온 사용자 정보를 사용하여 DB 조회
-            User user = userRepository.findByUsername(claims.getSubject()).orElseThrow(
-                    () -> new CustomException(ErrorCode.USER_NOT_FOUND)
-            );
-
-            Post post = postRepository.findByIdAndUsername(id, user.getUsername()).orElseThrow(
-                    () -> new CustomException(ErrorCode.UNAVAILABLE_MODIFICATION)
-            );
-            postRepository.deleteByIdAndUsername(id, user.getUsername());
-            return new MsgResponseDto("게시글 삭제 성공!!", 200);
-        } else {
-            return new MsgResponseDto("token이 존재하지 않습니다.", 404);
-        }
-    }
-
-    @Transactional
+    @Transactional(readOnly = true)
     public List<PostSampleResponseDto> readByCategory(String category) {
         List<Post> all = postRepository.findByCategory(category);
         List<PostSampleResponseDto> postSampleResponseDtoList = new ArrayList<>();
@@ -170,5 +95,36 @@ public class PostService {
 
         return postSampleResponseDtoList;
     }
- */
+
+    public User getUserByIdIfExists(Long userId) {
+        return userRepository.findById(userId).orElseThrow(
+                () -> new CustomException(ErrorCode.USER_NOT_FOUND)
+        );
+    }
+
+    //post 유무 확인
+    public void checkPost(Long postId) {
+        if (!postRepository.existsById(postId)) {
+            throw new CustomException(ErrorCode.NOT_FOUND_POST);
+        }
+    }
+
+    //comment 코맨트 유무 확인
+    public Comment getCommentByIdIfExists(Long commentId) {
+        return commentRepository.findById(commentId).orElseThrow(
+                () -> new CustomException(ErrorCode.NOT_FOUND_COMMENT)
+        );
+    }
+
+    public void checkOwner(Post post, String username) {
+        if (!post.getUsername().equals(username)) {
+            throw new CustomException(ErrorCode.UNAVAILABLE_MODIFICATION);
+        }
+    }
+
+    public void checkUser(Long userId) {
+        if (!userRepository.existsById(userId)) {
+            throw new CustomException(ErrorCode.INVALID_TOKEN);
+        }
+    }
 }

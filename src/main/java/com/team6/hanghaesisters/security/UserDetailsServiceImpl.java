@@ -24,7 +24,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return userRepository.findByUsername(username)
                 .map(this::createUserDetails)
                 .orElse(null);
-
     }
 
     private UserDetails createUserDetails(User user){

@@ -30,15 +30,14 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http.csrf()
-                .disable();
+        http.csrf().disable();
 
         http
                 // antMatchers -> requestMatchers 로 변경 (version 3.0.0 에서는 이렇게 사용)
                 .authorizeRequests(auth -> auth
                         .requestMatchers("/api/user/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/posts").permitAll()
-                        .requestMatchers(HttpMethod.GET,"/api/posts/{\\d+}").permitAll()
+//                        .requestMatchers(HttpMethod.GET,"/api/posts/{\\d+}").permitAll()
                         .anyRequest().authenticated());
         http
                 .logout()
