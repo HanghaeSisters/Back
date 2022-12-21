@@ -35,7 +35,7 @@ public class WebSecurityConfig {
 
         http
                 // antMatchers -> requestMatchers 로 변경 (version 3.0.0 에서는 이렇게 사용)
-                .authorizeRequests(auth -> auth
+                .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/user/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/posts").permitAll()
                         .requestMatchers(HttpMethod.GET,"/api/posts/{\\d+}").permitAll()
