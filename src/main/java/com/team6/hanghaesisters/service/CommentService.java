@@ -49,6 +49,9 @@ public class CommentService {
 		//댓글 존재여부 확인 후 가져오기
 		Comment comment = getCommentByIdIfExists(commentId);
 
+		if (!comment.getPostId().equals(postId)) {
+			throw new CustomException(ErrorCode.MISMATCH_COMMENT);
+		}
 		//댓글 작성자가 맞는지 확인
 		checkOwner(comment, userId);
 		comment.update(requestDto.content());

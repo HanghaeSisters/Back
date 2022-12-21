@@ -2,6 +2,7 @@ package com.team6.hanghaesisters.dto;
 
 import com.team6.hanghaesisters.entity.Comment;
 import jakarta.validation.constraints.NotBlank;
+import java.util.List;
 
 public class CommentDto {
 
@@ -13,6 +14,12 @@ public class CommentDto {
 
 		public ResponseDto(String username, Comment comment) {
 			this(comment.getId(), username, comment.getContent());
+		}
+	}
+
+	public record ResponseListDto(List<ResponseDto> commentList) {
+		public void addComment(ResponseDto responseDto) {
+			commentList.add(responseDto);
 		}
 	}
 }
