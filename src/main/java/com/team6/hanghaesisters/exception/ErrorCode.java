@@ -17,7 +17,8 @@ public enum ErrorCode {
 	UNAVAILABLE_MODIFICATION("작성자만 삭제/수정할 수 있습니다.", BAD_REQUEST.value()),
 	INVALID_TOKEN("토큰이 유효하지 않습니다.", BAD_REQUEST.value()),
 	EXPIRED_TOKEN("만료된 토큰입니다.", BAD_REQUEST.value()),
-	UNSUPPORTED_TOKEN("지원되지 않는 토큰입니다.", BAD_REQUEST.value());
+	UNSUPPORTED_TOKEN("지원되지 않는 토큰입니다.", BAD_REQUEST.value()),
+	MISMATCH_COMMENT("해당 게시글에 등록된 댓글이 아닙니다.", BAD_REQUEST.value());
 
 	private final String msg;
 	private final int statusCode;
