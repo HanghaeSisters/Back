@@ -4,6 +4,8 @@ import com.team6.hanghaesisters.dto.MsgResponseDto;
 import com.team6.hanghaesisters.dto.PostDto;
 import com.team6.hanghaesisters.service.PostService;
 import java.util.List;
+
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -26,8 +28,8 @@ public class PostController {
     private final PostService postService;
 
     //글 작성
-    @PostMapping("")
-    public PostDto.CreateResponseDto createPost(@RequestBody PostDto.RequestDto postRequestDto,
+    @PostMapping
+    public PostDto.CreateResponseDto createPost(@Valid @RequestBody PostDto.RequestDto postRequestDto,
                                       @AuthenticationPrincipal UserDetails userDetails){
         return postService.create(postRequestDto, Long.parseLong(userDetails.getUsername()));
     }
@@ -41,7 +43,7 @@ public class PostController {
 
     //글 수정
     @PutMapping("/{id}")
-    public PostDto.AllResponseDto  updatePost(@PathVariable Long id, @RequestBody PostDto.RequestDto postRequestDto,
+    public PostDto.AllResponseDto  updatePost(@PathVariable Long id, @Valid @RequestBody PostDto.RequestDto postRequestDto,
                                       @AuthenticationPrincipal UserDetails userDetails){
         return postService.update(id, postRequestDto, Long.parseLong(userDetails.getUsername()));
     }

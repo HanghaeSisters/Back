@@ -16,7 +16,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
     private final ObjectMapper om;
 
     private static final String DEFAULT_ERROR_MSG = "Full authentication is required to access this resource";
-    private static final String CUSTOM_DEFAULT_ERROR_MSG = "로그인이 필요합니다";
+    private static final String CUSTOM_DEFAULT_ERROR_MSG = "문제가 발생했습니다.";
 
 
     @Override

@@ -65,7 +65,7 @@ public class JwtUtil {
                 .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
 
-        return TOKEN_PREFIX + accessToken;
+        return accessToken;
     }
 
     public Authentication getAuthentication(String accessToken) {
