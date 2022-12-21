@@ -4,10 +4,6 @@ import com.team6.hanghaesisters.entity.User;
 import com.team6.hanghaesisters.validation.ValidSignup;
 import jakarta.validation.constraints.NotBlank;
 
-/**
- * inner class로 구성한 DTO 클래스
- * java 14 이후 추가된 record를 사용
- */
 public class UserDto {
 
     @ValidSignup
