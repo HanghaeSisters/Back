@@ -88,12 +88,16 @@ public class JwtUtil {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
         } catch (SecurityException | MalformedJwtException e) {
             log.error("잘못된 JWT 서명입니다.", e);
+            throw new InvalidCookieException("잘못된 JWT 서명입니다. 다시 로그인해주세요.");
         } catch (ExpiredJwtException e) {
             log.error("만료된 JWT 토큰입니다.", e);
+            throw new InvalidCookieException("만료된 JWT 토큰입니다. 다시 로그인해주세요.");
         } catch (UnsupportedJwtException e) {
             log.error("지원되지 않는 JWT 토큰입니다.", e);
+            throw new InvalidCookieException("지원되지 않는 JWT 토큰입니다. 다시 로그인해주세요.");
         } catch (IllegalArgumentException e) {
             log.error("JWT 토큰이 잘못되었습니다.");
+            throw new InvalidCookieException("JWT 토큰이 유효하지 않습니다. 다시 로그인해주세요.");
         }
     }
 
