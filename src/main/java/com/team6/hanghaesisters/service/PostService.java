@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,9 +29,12 @@ public class PostService {
     private final UserRepository userRepository;
 
     public PostDto.CreateResponseDto create(PostDto.RequestDto postRequestDto, Long userId) {
+        log.info("started to create post");
+
         User user = getUserByIdIfExists(userId);
 
         Post post = postRepository.saveAndFlush(new Post(postRequestDto, user.getUsername()));
+        log.info("end to create post");
 
         return new PostDto.CreateResponseDto(post);
     }
@@ -44,6 +46,7 @@ public class PostService {
         User user = getUserByIdIfExists(userId);
 
         CommentDto.ResponseListDto commentList = getCommentList(id, user.getUsername());
+        log.info("read post");
 
         return new PostDto.AllResponseDto (post, commentList);
     }
@@ -57,6 +60,7 @@ public class PostService {
         post.update(postRequestDto);
 
         CommentDto.ResponseListDto commentList = getCommentList(id, user.getUsername());
+        log.info("update post");
 
         return new PostDto.AllResponseDto(post, commentList);
     }
@@ -85,6 +89,8 @@ public class PostService {
                                                                 .build();
             previewList.add(dto);
         }
+        log.info("read post by category");
+
         return previewList;
     }
 
@@ -123,6 +129,8 @@ public class PostService {
         for (Comment comment: comments) {
             commentList.addComment(new CommentDto.ResponseDto(username, comment));
         }
+        log.info("get commentList");
+
         return commentList;
     }
 }

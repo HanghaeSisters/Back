@@ -10,6 +10,7 @@ import com.team6.hanghaesisters.repository.CommentRepository;
 import com.team6.hanghaesisters.repository.PostRepository;
 import com.team6.hanghaesisters.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional
+@Slf4j
 public class CommentService {
 
 	private final PostRepository postRepository;
@@ -24,7 +26,7 @@ public class CommentService {
 	private final UserRepository userRepository;
 
 	public CommentDto.ResponseDto createComment(Long postId, CommentDto.RequestDto requestDto, Long userId) {
-
+		log.info("started to create comment");
 		//게시글 존재여부 확인
 		checkPost(postId);
 
@@ -36,6 +38,7 @@ public class CommentService {
 		commentRepository.save(comment);
 
 		User user = getUserByIdIfExists(userId);
+		log.info("end to create comment");
 
 		return new CommentDto.ResponseDto(user.getUsername(), comment);
 	}
@@ -57,6 +60,8 @@ public class CommentService {
 		comment.update(requestDto.content());
 
 		User user = getUserByIdIfExists(userId);
+		log.info("update comment");
+
 		return new CommentDto.ResponseDto(user.getUsername(), comment);
 	}
 

@@ -8,6 +8,7 @@ import com.team6.hanghaesisters.repository.UserRepository;
 import com.team6.hanghaesisters.security.jwt.JwtUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Transactional
 @Service
+@Slf4j
 public class UserService {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final UserRepository userRepository;
@@ -38,6 +40,7 @@ public class UserService {
 
         //인증 완료된 객체로 JWT 생성
         httpServletResponse.addHeader(JwtUtil.AUTHORIZATION_HEADER, jwtUtil.generateToken(afterAuthentication));
+        log.info("created jwt token");
 
         return new MsgResponseDto("로그인 되었습니다.", HttpStatus.OK.value());
     }
@@ -47,6 +50,7 @@ public class UserService {
         if (userRepository.existsByUsername(username)) {
             throw new CustomException(ErrorCode.OVERLAP_USERID);
         }
+        log.info("checked id");
 
         return new MsgResponseDto("사용 가능한 아이디입니다.", HttpStatus.OK.value());
     }

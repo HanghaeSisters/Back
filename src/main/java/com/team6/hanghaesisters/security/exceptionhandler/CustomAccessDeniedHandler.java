@@ -6,11 +6,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
 @RequiredArgsConstructor
+@Slf4j
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
     private final ObjectMapper om;
@@ -21,6 +23,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException {
+        log.error(DEFAULT_ERROR_MSG);
 
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
