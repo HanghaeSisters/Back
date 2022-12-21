@@ -35,7 +35,10 @@ public class WebSecurityConfig {
                 // antMatchers -> requestMatchers 로 변경 (version 3.0.0 에서는 이렇게 사용)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/user/**").permitAll()
+                        .requestMatchers("/api/post/hospital").permitAll()
                         .requestMatchers("/api/post/category").permitAll()
+                        .requestMatchers("/api/hospital/save-all").permitAll()
+
                         .anyRequest().authenticated());
         http
                 .logout()

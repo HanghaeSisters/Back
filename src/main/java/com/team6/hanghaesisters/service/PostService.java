@@ -1,14 +1,17 @@
 package com.team6.hanghaesisters.service;
 
 import com.team6.hanghaesisters.dto.CommentDto;
+import com.team6.hanghaesisters.dto.HospitalDto;
 import com.team6.hanghaesisters.dto.MsgResponseDto;
 import com.team6.hanghaesisters.dto.PostDto;
 import com.team6.hanghaesisters.entity.Comment;
+import com.team6.hanghaesisters.entity.Hospital;
 import com.team6.hanghaesisters.entity.Post;
 import com.team6.hanghaesisters.entity.User;
 import com.team6.hanghaesisters.exception.CustomException;
 import com.team6.hanghaesisters.exception.ErrorCode;
 import com.team6.hanghaesisters.repository.CommentRepository;
+import com.team6.hanghaesisters.repository.HospitalRepository;
 import com.team6.hanghaesisters.repository.PostRepository;
 import com.team6.hanghaesisters.repository.UserRepository;
 import java.util.ArrayList;
@@ -28,6 +31,7 @@ public class PostService {
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
+    private final HospitalRepository hospitalRepository;
 
     public PostDto.CreateResponseDto create(PostDto.RequestDto postRequestDto, Long userId) {
         User user = getUserByIdIfExists(userId);
@@ -88,6 +92,11 @@ public class PostService {
         return previewList;
     }
 
+    @Transactional(readOnly = true)
+    public MsgResponseDto checkHospital(HospitalDto.RequestDto requestDto) {
+        return checkHospital(requestDto.hospitalName());
+    }
+
     //userId 로 유저정보 가져오기
     private User getUserByIdIfExists(Long userId) {
         return userRepository.findById(userId).orElseThrow(
@@ -124,5 +133,13 @@ public class PostService {
             commentList.addComment(new CommentDto.ResponseDto(username, comment));
         }
         return commentList;
+    }
+
+    private MsgResponseDto checkHospital(String hospitalName) {
+        if (hospitalRepository.existsByHospitalName(hospitalName) == null) {
+            return new MsgResponseDto("존재하지 않는 병원입니다.", HttpStatus.BAD_REQUEST.value());
+        }else{
+            return new MsgResponseDto("존재하는 병원입니다.", HttpStatus.OK.value());
+        }
     }
 }
