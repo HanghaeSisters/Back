@@ -26,11 +26,10 @@ import java.util.stream.Collectors;
 public class JwtUtil {
 
     public static final String AUTHORIZATION_HEADER = "Authorization";
-
     public static final String TOKEN_PREFIX = "Bearer ";
     private static final String AUTHORITY_KEY = "auth";
 
-    private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 30; // 30분
+    private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 60; // 60분
 
     private final Key key;
 
@@ -58,14 +57,13 @@ public class JwtUtil {
         Date accessTokenExpiresIn = new Date(new Date().getTime() + ACCESS_TOKEN_EXPIRE_TIME);
 
         //Access Token 생성
-        String accessToken = Jwts.builder()
+
+        return Jwts.builder()
                 .setSubject(authentication.getName())
                 .claim(AUTHORITY_KEY, authorities)
                 .setExpiration(accessTokenExpiresIn)
                 .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
-
-        return accessToken;
     }
 
     public Authentication getAuthentication(String accessToken) {
@@ -87,16 +85,16 @@ public class JwtUtil {
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
         } catch (SecurityException | MalformedJwtException e) {
-            log.error("잘못된 JWT 서명입니다.", e);
+            log.error(e + ": 잘못된 JWT 서명입니다.");
             throw new InvalidCookieException("잘못된 JWT 서명입니다. 다시 로그인해주세요.");
         } catch (ExpiredJwtException e) {
-            log.error("만료된 JWT 토큰입니다.", e);
+            log.error(e + ": 만료된 JWT 토큰입니다.");
             throw new InvalidCookieException("만료된 JWT 토큰입니다. 다시 로그인해주세요.");
         } catch (UnsupportedJwtException e) {
-            log.error("지원되지 않는 JWT 토큰입니다.", e);
+            log.error(e + ": 지원되지 않는 JWT 토큰입니다.");
             throw new InvalidCookieException("지원되지 않는 JWT 토큰입니다. 다시 로그인해주세요.");
         } catch (IllegalArgumentException e) {
-            log.error("JWT 토큰이 잘못되었습니다.");
+            log.error(e + ": JWT 토큰이 잘못되었습니다.");
             throw new InvalidCookieException("JWT 토큰이 유효하지 않습니다. 다시 로그인해주세요.");
         }
     }
