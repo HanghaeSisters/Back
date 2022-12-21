@@ -1,17 +1,22 @@
 package com.team6.hanghaesisters.controller;
 
 import com.team6.hanghaesisters.dto.MsgResponseDto;
-import com.team6.hanghaesisters.dto.PostRequestDto;
-import com.team6.hanghaesisters.dto.PostResponseDto;
-import com.team6.hanghaesisters.dto.PostSampleResponseDto;
+import com.team6.hanghaesisters.dto.PostDto;
 import com.team6.hanghaesisters.service.PostService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @RestController
@@ -22,22 +27,21 @@ public class PostController {
 
     //글 작성
     @PostMapping("")
-    public PostResponseDto createPost(@RequestBody PostRequestDto postRequestDto,
+    public PostDto.CreateResponseDto createPost(@RequestBody PostDto.RequestDto postRequestDto,
                                       @AuthenticationPrincipal UserDetails userDetails){
-        log.info("UserDetails:" + userDetails);
         return postService.create(postRequestDto, Long.parseLong(userDetails.getUsername()));
     }
 
     //글 조회
     @GetMapping("/{id}")
-    public PostResponseDto readOnePost(@PathVariable Long id,
+    public PostDto.AllResponseDto readOnePost(@PathVariable Long id,
                                        @AuthenticationPrincipal UserDetails userDetails) {
         return postService.readOne(id, Long.parseLong(userDetails.getUsername()));
     }
 
     //글 수정
     @PutMapping("/{id}")
-    public PostResponseDto updatePost(@PathVariable Long id, @RequestBody PostRequestDto postRequestDto,
+    public PostDto.AllResponseDto  updatePost(@PathVariable Long id, @RequestBody PostDto.RequestDto postRequestDto,
                                       @AuthenticationPrincipal UserDetails userDetails){
         return postService.update(id, postRequestDto, Long.parseLong(userDetails.getUsername()));
     }
@@ -47,9 +51,8 @@ public class PostController {
         return postService.delete(id, Long.parseLong(userDetails.getUsername()));
     }
 
-//    @RequestParam
     @GetMapping("/category")
-    public List<PostSampleResponseDto> readPostByCategory(@RequestParam("category") String category) {
+    public List<PostDto.PreviewResponseDto> readPostByCategory(@RequestParam("category") String category) {
         return postService.readByCategory(category);
     }
 

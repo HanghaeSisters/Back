@@ -1,7 +1,11 @@
 package com.team6.hanghaesisters.entity;
 
-import com.team6.hanghaesisters.dto.PostRequestDto;
-import jakarta.persistence.*;
+import com.team6.hanghaesisters.dto.PostDto;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -42,26 +46,26 @@ public class Post extends TimeStamped {
     @Column(nullable = false)
     private String doctor;
 
-    public Post(PostRequestDto postRequestDto, String username) {
+    public Post(PostDto.RequestDto postRequestDto, String username) {
         this.username = username;
-        this.title = postRequestDto.getTitle();
-        this.category = postRequestDto.getCategory();
-        this.imageBefore = postRequestDto.getImageBefore();
-        this.imageAfter = postRequestDto.getImageAfter();
-        this.content = postRequestDto.getContent();
-        this.price = postRequestDto.getPrice();
-        this.hospitalAddress = postRequestDto.getHospitalAddress();
-        this.doctor = postRequestDto.getDoctor();
+        this.title = postRequestDto.title();
+        this.category = postRequestDto.category();
+        this.imageBefore = postRequestDto.imageBefore();
+        this.imageAfter = postRequestDto.imageAfter();
+        this.content = postRequestDto.content();
+        this.price = postRequestDto.price();
+        this.hospitalAddress = postRequestDto.hospitalAddress();
+        this.doctor = postRequestDto.doctor();
     }
 
-    public void update(PostRequestDto postRequestDto) {
-        this.title = postRequestDto.getTitle();
-        this.category = postRequestDto.getCategory();
-        this.imageBefore = postRequestDto.getImageBefore();
-        this.imageAfter = postRequestDto.getImageAfter();
-        this.content = postRequestDto.getContent();
-        this.price = postRequestDto.getPrice();
-        this.hospitalAddress = postRequestDto.getHospitalAddress();
-        this.doctor = postRequestDto.getDoctor();
+    public void update(PostDto.RequestDto postRequestDto) {
+        this.title = postRequestDto.title();
+        this.category = postRequestDto.category();
+        this.imageBefore = postRequestDto.imageBefore();
+        this.imageAfter = postRequestDto.imageAfter();
+        this.content = postRequestDto.content();
+        this.price = postRequestDto.price();
+        this.hospitalAddress = postRequestDto.hospitalAddress();
+        this.doctor = postRequestDto.doctor();
     }
 }
