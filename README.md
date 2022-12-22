@@ -5,8 +5,9 @@
 * [Notion: 항해언니 프로젝트 정보](https://www.notion.so/d2dffd18ee9d4d8e958185e288c08a2e)
 * [[Front-End Repository]](https://github.com/HanghaeSisters/Front)  
   
-📆 개발 기간
+## 📆 개발 기간  
 2022년 12월 16일 ~ 2022년 12월 22일   
+<p>
 
 ## 👯 팀원
 **김규민(팀장)**  
@@ -20,7 +21,8 @@
 **정첨백**  
 [<img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=Github&logoColor=white">](https://github.com/civilcoy)
 <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat-square&logo=springboot&logoColor=white"/>
-
+<p>
+  
 ## 🛠️ Tech Stacks
 |종류|기술|
 |:----:|:----|
