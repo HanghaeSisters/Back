@@ -1,5 +1,6 @@
 package com.team6.hanghaesisters.controller;
 
+import com.team6.hanghaesisters.dto.HospitalDto;
 import com.team6.hanghaesisters.dto.MsgResponseDto;
 import com.team6.hanghaesisters.dto.PostDto;
 import com.team6.hanghaesisters.service.PostService;
@@ -58,6 +59,10 @@ public class PostController {
         return postService.readByCategory(category);
     }
 
+    @PostMapping("/hospital")
+    public MsgResponseDto checkHospital(@Valid @RequestBody HospitalDto.RequestDto requestDto) {
+        return postService.checkHospital(requestDto);
+    }
 }
 
 
