@@ -1,2 +1,0 @@
-[2022-12-22 00:02:49:35117][http-nio-8080-exec-2] ERROR c.t.h.s.e.CustomAuthenticationEntryPoint - Full authentication is required to access this resource
-[2022-12-22 00:03:26:72130][http-nio-8080-exec-3] ERROR c.t.h.security.jwt.JwtUtil - io.jsonwebtoken.ExpiredJwtException: JWT expired at 2022-12-21T13:09:29Z. Current time: 2022-12-21T15:03:26Z, a difference of 6837367 milliseconds.  Allowed clock skew: 0 milliseconds.: 만료된 JWT 토큰입니다.
