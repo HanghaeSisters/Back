@@ -43,11 +43,14 @@
 |Server|<img src="https://img.shields.io/badge/Amazon EC2-FF9900?style=flat-square&logo=Amazon EC2&logoColor=white"/>
   
 ## 📌 API 설계  
-<img width="800" alt="api섨계1" src-"https://blog.kakaocdn.net/dn/7tj8U/btrUh2KTyIc/v0XwD73QkEp9BNIAuZaEOK/img.png">
-##🐳 ERD 설계
+<img width="800" alt="api설계1" src="https://blog.kakaocdn.net/dn/7tj8U/btrUh2KTyIc/v0XwD73QkEp9BNIAuZaEOK/img.png">
+<img width="800" alt="api설계2" src="https://blog.kakaocdn.net/dn/r7Qoa/btrUl5UdiI4/Yadm2FZ1N3KmpmQkPyH7kK/img.png">
+<img width="800" alt="api설계3" src="https://blog.kakaocdn.net/dn/NHU0R/btrUh3bZCqZ/KJ8SzuNFb7sKNlqHbgt7F1/img.png">  
+
+## 🐳 ERD 설계
 <img width="800" alt="메인페이지2" src="https://user-images.githubusercontent.com/65327103/209082821-ecdf919c-601a-4c36-b2d3-5d205b0414f6.png">
 
-##💡Trouble Shooting
+## 💡Trouble Shooting
 <details>
 <summary>1. 거짓된 병원 정보를 입력할 수 있었던 문제</summary>
 <br>
