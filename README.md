@@ -50,12 +50,129 @@
 <summary>1. 거짓된 병원 정보를 입력할 수 있었던 문제</summary>
 <br>
 <div markdown="1">
-<b> ~~~ 방식으로 해결</b>  
-  
+<b>오픈 api를 사용하여 전국의 병‧의원 중 진료과목에 성형외과가 있는 기관명을 받아와 조회하는 방식으로 해결</b>  
+	
+<b>1. 오픈 api로 전국의 병‧의원 중 진료과목에 성형외과가 있는 기관을 찾아 우리의 DB에 저장하기<b>
+	
 ```java
-  System.oyt.println("asd");
-```
+	@Service
+	@Slf4j
+	@RequiredArgsConstructor
+	@ToString
+	public class HospitalService {
 
+	    private final HospitalRepository hospitalRepository;
+
+	    @Value("${hospital-url}")
+	    private String hospitalUrl;
+
+	    @Value("${hospital-key}")
+	    private String hospitalKey;
+
+	    private  Hospital getTagValue(String tag, Element eElement) {
+		NodeList nlList = eElement.getElementsByTagName(tag).item(0).getChildNodes();
+		Node nValue = nlList.item(0);
+		if (nValue == null)
+		    return null;
+		return new Hospital(nValue.getNodeValue());
+	    }
+
+	    public void saveHospitalApiData(){
+		try{
+		    StringBuilder urlBuilder = new StringBuilder(hospitalUrl); /*URL*/
+		    urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "="+hospitalKey); /*Service Key*/
+		    urlBuilder.append("&" + URLEncoder.encode("QD", "UTF-8") + "=" + URLEncoder.encode("D010", "UTF-8")); /*CODE_MST의'D000' 참조(D001~D029)*/
+		    urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("4728", "UTF-8")); /*목록 건수*/
+		    String url = urlBuilder.toString();
+
+		    Document documentInfo = DocumentBuilderFactory
+			    .newInstance()
+			    .newDocumentBuilder()
+			    .parse(url);
+
+		    documentInfo.getDocumentElement().normalize();
+
+		    NodeList nodeList = documentInfo.getElementsByTagName("item");
+
+		    for (int temp = 0; temp < nodeList.getLength(); temp++) {
+			Node node = nodeList.item(temp);
+			if (node.getNodeType() == Node.ELEMENT_NODE) {
+			    Element element = (Element) node;
+
+			    Hospital hospitalData = getTagValue("dutyName", element);
+			    log.info(":::" + hospitalData + ":::");
+			    hospitalRepository.save(hospitalData);
+			}
+		    }
+		} catch(Exception e) {
+		    e.printStackTrace();
+		    log.error("hospital data not saved");
+		    throw new CustomException(ErrorCode.FAILED_SAVE_DATA);
+		}
+	    }
+	}
+```  
+								   
+<b>2. 찾아온 데이터를 우리의 DB에 저장하기<b>  
+		
+```java
+	@RestController
+	@RequiredArgsConstructor
+	public class HospitalController {
+
+	    private final HospitalService hospitalService;
+
+	    @PostMapping("/api/hospital/save-all")
+	    public String HospitalApiSave() {
+		return hospitalService.saveHospitalApiData();
+	    }
+	}
+```  
+	
+<b>3. 조회한 병원이 존재하는지 확인하기</b>  
+	
+* Controller
+	
+```java
+	@RequiredArgsConstructor
+	@RestController
+	@RequestMapping("/api/post")
+	@Slf4j
+	public class PostController {
+		@GetMapping("/hospital")
+		public MsgResponseDto checkHospital(@RequestParam("hospital-name") String hospitalName) {
+		return postService.checkHospital(hospitalName);
+		}
+	}
+```  
+	
+* Service
+	
+```java
+	@Service
+	@RequiredArgsConstructor
+	@Slf4j
+	@Transactional
+	public class PostService {
+		private final HospitalRepository hospitalRepository;
+
+		private void hospitalNameValidation(String hospitalName) {
+			boolean name_check = Pattern.matches("^[가-힣|0-9|a-z|A-Z]+$", hospitalName);
+			if(!name_check) throw new CustomException(ErrorCode.VALIDATION_NOT_APPROPRIATE);
+		}
+	
+		@Transactional(readOnly = true)
+		public MsgResponseDto checkHospital(String hospitalName) {
+			hospitalNameValidation(hospitalName);
+
+			if (hospitalRepository.findByHospitalName(hospitalName).size() == 0) {
+		  	  return new MsgResponseDto("존재하지 않는 병원입니다.", HttpStatus.BAD_REQUEST.value());
+			}else{
+			    return new MsgResponseDto("존재하는 병원입니다.", HttpStatus.OK.value());
+			}
+		}
+	}
+```
 </div>
 </details>
 
@@ -73,6 +190,7 @@
 <br>
 <div markdown="3">
 <b>requestbody에서 값이 들어오지 않았을때의 예외 처리가 부족하여 PostDto에 @NotBalnk를 추가하는 방식으로 해결</b>  
+	
 <b>수정 전 코드</b>  
 	
   ```java
