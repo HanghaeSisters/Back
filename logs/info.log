@@ -350,3 +350,23 @@ You may wish to exclude one of them to ensure predictable runtime behavior
 [2022-12-22 16:15:38:8354][http-nio-8080-exec-3] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.team6.hanghaesisters.exception.CustomException]
 [2022-12-22 16:15:44:13810][http-nio-8080-exec-4] ERROR c.t.h.e.CustomExceptionHandler - custom exception occurred: 정해진 정규표현식과 일치하지 않습니다.
 [2022-12-22 16:15:44:13811][http-nio-8080-exec-4] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.team6.hanghaesisters.exception.CustomException]
+[2022-12-22 16:27:13:702847][http-nio-8080-exec-7] INFO  o.a.coyote.http11.Http11Processor - Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+java.lang.IllegalArgumentException: Invalid character found in method name [0x040x010x00P0x000x000x000x010x00example.com0x00...]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:419)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:272)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:861)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1739)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+[2022-12-22 17:55:14:5983989][http-nio-8080-exec-1] ERROR c.t.h.s.e.CustomAuthenticationEntryPoint - Full authentication is required to access this resource
+[2022-12-22 17:56:44:6074101][http-nio-8080-exec-2] ERROR c.t.h.s.e.CustomAuthenticationEntryPoint - Full authentication is required to access this resource
+[2022-12-22 18:37:26:8515498][http-nio-8080-exec-4] ERROR c.t.h.s.e.CustomAuthenticationEntryPoint - Full authentication is required to access this resource
+[2022-12-22 18:37:26:8515833][http-nio-8080-exec-6] ERROR c.t.h.s.e.CustomAuthenticationEntryPoint - Full authentication is required to access this resource
+[2022-12-22 18:38:40:8589993][SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+[2022-12-22 18:38:40:8590006][SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+[2022-12-22 18:38:40:8590087][SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

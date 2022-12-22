@@ -9,3 +9,7 @@
 [2022-12-22 16:15:14:585322][http-nio-8080-exec-7] ERROR c.t.h.e.CustomExceptionHandler - custom exception occurred: 정해진 정규표현식과 일치하지 않습니다.
 [2022-12-22 16:15:38:8350][http-nio-8080-exec-3] ERROR c.t.h.e.CustomExceptionHandler - custom exception occurred: 정해진 정규표현식과 일치하지 않습니다.
 [2022-12-22 16:15:44:13810][http-nio-8080-exec-4] ERROR c.t.h.e.CustomExceptionHandler - custom exception occurred: 정해진 정규표현식과 일치하지 않습니다.
+[2022-12-22 17:55:14:5983989][http-nio-8080-exec-1] ERROR c.t.h.s.e.CustomAuthenticationEntryPoint - Full authentication is required to access this resource
+[2022-12-22 17:56:44:6074101][http-nio-8080-exec-2] ERROR c.t.h.s.e.CustomAuthenticationEntryPoint - Full authentication is required to access this resource
+[2022-12-22 18:37:26:8515498][http-nio-8080-exec-4] ERROR c.t.h.s.e.CustomAuthenticationEntryPoint - Full authentication is required to access this resource
+[2022-12-22 18:37:26:8515833][http-nio-8080-exec-6] ERROR c.t.h.s.e.CustomAuthenticationEntryPoint - Full authentication is required to access this resource
