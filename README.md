@@ -48,8 +48,9 @@
 ## 트러블 슈팅
 <details>
 <summary>1. 거짓된 병원 정보를 입력할 수 있었던 문제</summary>
+<br>
 <div markdown="1">
-
+<b> ~~~ 방식으로 해결</b>  
 
 
 </div>
@@ -57,8 +58,9 @@
 
 <details>
 <summary>2. 해당 게시글에서 작성한 댓글이 아님에도 댓글 아이디값만으로 모든 댓글의 수정이 가능했던 문제</summary>
-<div markdown="1">
-
+<br>
+<div markdown="2">
+<b> ~~~ 방식으로 해결</b>  
 
 
 </div>
@@ -66,8 +68,9 @@
 
 <details>
 <summary>3. 포스트에서 예외처리가 부족하여 모든 에러에 401 토큰 예외가 발생했던 문제</summary>
-<div markdown="1">
-
+<br>
+<div markdown="3">
+<b> ~~~ 방식으로 해결</b>  
 
 
 </div>
@@ -75,8 +78,9 @@
 
 <details>
 <summary>4. 거짓된 병원 정보를 입력할 수 있었던 문제</summary>
-<div markdown="1">
-
+<br>
+<div markdown="4">
+<b> ~~~ 방식으로 해결</b>  
 
 
 </div>
