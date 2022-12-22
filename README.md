@@ -80,7 +80,9 @@
 <br>
 <div markdown="4">
 <b> ~~~ 방식으로 해결</b>  
-
+```java
+  System.out.println("asd");
+```
 
 </div>
 </details>
