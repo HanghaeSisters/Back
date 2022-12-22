@@ -51,7 +51,10 @@
 <br>
 <div markdown="1">
 <b> ~~~ 방식으로 해결</b>  
-
+  
+```java
+  System.oyt.println("asd");
+```
 
 </div>
 </details>
@@ -80,8 +83,10 @@
 <br>
 <div markdown="4">
 <b> ~~~ 방식으로 해결</b>  
-```java
-  System.out.println("asd");
+```java  
+  function square(n) {
+  return n * n;
+}
 ```
 
 </div>
