@@ -2,7 +2,7 @@
 성형에 대해 고민하고 있으신가요?  
 경험과 정보를 공유하고 고민을 덜어가세요!!
 
-* [Notion: 항해언니 프로젝트 정보](https://www.notion.so/d2dffd18ee9d4d8e958185e288c08a2e)
+* [[Notion: 항해언니 프로젝트 정보]](https://www.notion.so/d2dffd18ee9d4d8e958185e288c08a2e)
 * [[Front-End Repository]](https://github.com/HanghaeSisters/Front)  
   
 ## 📆 개발 기간  
@@ -12,14 +12,17 @@
   
   ## 👯 팀원
 **김규민(팀장)**  
+<p>    
 [<img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=Github&logoColor=white">](https://github.com/starMinK)
 <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat-square&logo=springboot&logoColor=white"/>
 
 **김소라**  
+<p>  
 [<img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=Github&logoColor=white">](https://github.com/dev-rara)
 <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat-square&logo=springboot&logoColor=white"/>
 
 **정첨백**  
+<p>  
 [<img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=Github&logoColor=white">](https://github.com/civilcoy)
 <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat-square&logo=springboot&logoColor=white"/>
 <p>  
