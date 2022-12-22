@@ -1,6 +1,8 @@
 package com.team6.hanghaesisters.service;
 
 import com.team6.hanghaesisters.entity.Hospital;
+import com.team6.hanghaesisters.exception.CustomException;
+import com.team6.hanghaesisters.exception.ErrorCode;
 import com.team6.hanghaesisters.repository.HospitalRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
@@ -29,14 +31,15 @@ public class HospitalService {
     @Value("${hospital-key}")
     private String hospitalKey;
 
-    public Hospital getTagValue(String tag, Element eElement) {
+    private  Hospital getTagValue(String tag, Element eElement) {
         NodeList nlList = eElement.getElementsByTagName(tag).item(0).getChildNodes();
         Node nValue = nlList.item(0);
         if (nValue == null)
             return null;
         return new Hospital(nValue.getNodeValue());
     }
-    public String saveHospitalApiData(){
+
+    public void saveHospitalApiData(){
         try{
             StringBuilder urlBuilder = new StringBuilder(hospitalUrl); /*URL*/
             urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "="+hospitalKey); /*Service Key*/
@@ -63,10 +66,10 @@ public class HospitalService {
                     hospitalRepository.save(hospitalData);
                 }
             }
-            return "saveHospitalApiData 성공";
         } catch(Exception e) {
             e.printStackTrace();
-            return "에러 발생";
+            log.error("hospital data not saved");
+            throw new CustomException(ErrorCode.FAILED_SAVE_DATA);
         }
     }
 }
