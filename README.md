@@ -83,7 +83,8 @@
 <br>
 <div markdown="4">
 <b> ~~~ 방식으로 해결</b>  
-```java  
+  
+```java
   function square(n) {
   return n * n;
 }
