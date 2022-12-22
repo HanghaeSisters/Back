@@ -1,9 +1,9 @@
 package com.team6.hanghaesisters.exception;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
 
 @Getter
 public enum ErrorCode {
@@ -18,7 +18,11 @@ public enum ErrorCode {
 	INVALID_TOKEN("토큰이 유효하지 않습니다.", BAD_REQUEST.value()),
 	EXPIRED_TOKEN("만료된 토큰입니다.", BAD_REQUEST.value()),
 	UNSUPPORTED_TOKEN("지원되지 않는 토큰입니다.", BAD_REQUEST.value()),
-	MISMATCH_COMMENT("해당 게시글에 등록된 댓글이 아닙니다.", BAD_REQUEST.value());
+	MISMATCH_COMMENT("해당 게시글에 등록된 댓글이 아닙니다.", BAD_REQUEST.value()),
+
+
+	/* 500 서버 에러 */
+	FAILED_SAVE_DATA("데이터 저장에 실패하였습니다.", INTERNAL_SERVER_ERROR.value());
 
 	private final String msg;
 	private final int statusCode;
