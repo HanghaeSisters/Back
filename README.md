@@ -73,10 +73,8 @@
 <br>
 <div markdown="3">
 <b>requestbody에서 값이 들어오지 않았을때의 예외 처리가 부족하여 PostDto에 @NotBalnk를 추가하는 방식으로 해결</b>  
-    
-  
-  <b>수정 전 코드</b>  
-  
+<b>수정 전 코드</b>  
+	
   ```java
   @Getter
   public class PostRequestDto {
