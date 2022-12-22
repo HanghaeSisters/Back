@@ -60,7 +60,7 @@ public class PostController {
     }
 
     @GetMapping("/hospital")
-    public MsgResponseDto checkHospital(@Valid @RequestBody HospitalDto.RequestDto requestDto) {
+    public MsgResponseDto checkHospital(@Valid @RequestParam("hospital-name") HospitalDto.RequestDto requestDto) {
         return postService.checkHospital(requestDto);
     }
 }
