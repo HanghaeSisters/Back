@@ -72,8 +72,40 @@
 <summary>3. 포스트에서 예외처리가 부족하여 모든 에러에 401 토큰 예외가 발생했던 문제</summary>
 <br>
 <div markdown="3">
-<b> ~~~ 방식으로 해결</b>  
+<b>requestbody에서 값이 들어오지 않았을때의 예외 처리가 부족하여 PostDto에 @NotBalnk를 추가하는 방식으로 해결</b>  
+    
+  
+  <b>수정 전 코드</b>  
+  
+  ```java
+  @Getter
+  public class PostRequestDto {
+    private String title;
+    private String category;
+    private String imageBefore;
+    private String imageAfter;
+    private String content;
+    private int price;
+    private String hospitalAddress;
+    private String doctor;
+  }
+  ```
+  
+  <b>수정 후 코드</b>  
+   ```java
+  public class PostDto {
 
+	public record RequestDto(@NotBlank(message = "제목이 입력되지 않았습니다.") String title,
+							 @NotBlank(message = "카테고리가 입력되지 않았습니다.") String category,
+							 @NotBlank(message = "성형 전 이미지가 필요합니다.") String imageBefore,
+							 @NotBlank(message = "성형 후 이미지가 필요합니다.") String imageAfter,
+							 @NotBlank(message = "본문 내용이 입력되지 않았습니다.") String content,
+							 @NotNull(message = "금액이 입력되지 않았습니다.") Integer price,
+							 @NotBlank(message = "병원 주소가 입력되지 않았습니다.") String hospitalAddress,
+							 @NotBlank(message = "의사 정보가 입력되지 않았습니다.") String doctor) {
+	  }
+  }
+  ```
 
 </div>
 </details>
