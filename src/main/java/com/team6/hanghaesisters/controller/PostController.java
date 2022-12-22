@@ -59,7 +59,7 @@ public class PostController {
         return postService.readByCategory(category);
     }
 
-    @PostMapping("/hospital")
+    @GetMapping("/hospital")
     public MsgResponseDto checkHospital(@Valid @RequestBody HospitalDto.RequestDto requestDto) {
         return postService.checkHospital(requestDto);
     }

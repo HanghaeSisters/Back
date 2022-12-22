@@ -99,7 +99,7 @@ public class PostService {
 
     @Transactional(readOnly = true)
     public MsgResponseDto checkHospital(HospitalDto.RequestDto requestDto) {
-        return checkHospital(requestDto.hospitalName());
+        return checkHospital(requestDto.hospitalAddress());
     }
 
     //userId 로 유저정보 가져오기
