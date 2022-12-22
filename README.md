@@ -3,8 +3,8 @@
 > 경험과 정보를 공유하고 고민을 덜어가세요!!
 
 * [[Notion: 항해언니 프로젝트 정보]](https://www.notion.so/d2dffd18ee9d4d8e958185e288c08a2e)
-* [[Front-End Repository]](https://github.com/HanghaeSisters/Front)  
 * [[프로젝트 시연영상 보러가기]](https://youtu.be/gjkK6H2Z5v4)
+* [[Front-End Repository]](https://github.com/HanghaeSisters/Front)  
   
 ## 📆 개발 기간  
 2022년 12월 16일 ~ 2022년 12월 22일   
