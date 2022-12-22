@@ -53,7 +53,7 @@
 ## 🧩아키텍쳐
 <img width="800" alt="메인페이지2" src="https://blog.kakaocdn.net/dn/bOCbtg/btrUneCW2D2/BZyYOomTIzYOHSm4bmkEK1/img.png">  
 
-## 트러블 슈팅
+## 💡 Trouble Shooting
 <details>
 <summary>1. 거짓된 병원 정보를 입력할 수 있었던 문제</summary>
 <br>
