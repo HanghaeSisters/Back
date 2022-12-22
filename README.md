@@ -255,7 +255,7 @@ if (!comment.getPostId().equals(postId)) {
 }
 ```
 <br>
-<b>위와 아래 jwt secret 부분을 한 곳엔 key를 붙여놨었고 한 곳엔 빼놔서 발생했던 거라 통일해주어 오류를 해결할 수 있었다.</b>
+<b>위와 아래의 jwt secret 부분을, 한 곳엔 key를 붙여놨었고 한 곳엔 빼놔서 발생했던 문제라 통일해주고 오류를 해결할 수 있었다.</b>
 
 </div>
 </details>
