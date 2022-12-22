@@ -7,6 +7,8 @@ import com.team6.hanghaesisters.service.PostService;
 import java.util.List;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -60,8 +62,8 @@ public class PostController {
     }
 
     @GetMapping("/hospital")
-    public MsgResponseDto checkHospital(@Valid @RequestParam("hospital-name") HospitalDto.RequestDto requestDto) {
-        return postService.checkHospital(requestDto);
+    public MsgResponseDto checkHospital(@Valid @RequestParam("hospital-name") String hospitalName) {
+        return postService.checkHospital(hospitalName);
     }
 }
 

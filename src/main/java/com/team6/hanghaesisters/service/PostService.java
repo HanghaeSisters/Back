@@ -98,8 +98,13 @@ public class PostService {
     }
 
     @Transactional(readOnly = true)
-    public MsgResponseDto checkHospital(HospitalDto.RequestDto requestDto) {
-        return checkHospital(requestDto.hospitalAddress());
+    public MsgResponseDto checkHospital(String hospitalName) {
+        log.info(hospitalRepository.findByHospitalName(hospitalName).toString());
+        if (hospitalRepository.findByHospitalName(hospitalName).size() == 0) {
+            return new MsgResponseDto("존재하지 않는 병원입니다.", HttpStatus.BAD_REQUEST.value());
+        }else{
+            return new MsgResponseDto("존재하는 병원입니다.", HttpStatus.OK.value());
+        }
     }
 
     //userId 로 유저정보 가져오기
@@ -142,11 +147,11 @@ public class PostService {
         return commentList;
     }
 
-    private MsgResponseDto checkHospital(String hospitalName) {
+/*    private MsgResponseDto checkHospital(String hospitalName) {
         if (hospitalRepository.existsByHospitalName(hospitalName) == null) {
             return new MsgResponseDto("존재하지 않는 병원입니다.", HttpStatus.BAD_REQUEST.value());
         }else{
             return new MsgResponseDto("존재하는 병원입니다.", HttpStatus.OK.value());
         }
-    }
+    }*/
 }

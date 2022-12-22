@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface HospitalRepository extends JpaRepository<Hospital, Long> {
     @Query("select h.hospitalName from Hospital h where h.hospitalName like concat('%', :hospitalName, '%')")
-    List<String> existsByHospitalName(@Param("hospitalName") String hospitalName);
+    List<String> findByHospitalName(@Param("hospitalName") String hospitalName);
 }
