@@ -62,7 +62,7 @@ public class PostController {
     }
 
     @GetMapping("/hospital")
-    public MsgResponseDto checkHospital(@Valid @RequestParam("hospital-name") String hospitalName) {
+    public MsgResponseDto checkHospital(@RequestParam("hospital-name") String hospitalName) {
         return postService.checkHospital(hospitalName);
     }
 }

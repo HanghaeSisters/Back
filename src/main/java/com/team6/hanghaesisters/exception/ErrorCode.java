@@ -19,6 +19,7 @@ public enum ErrorCode {
 	EXPIRED_TOKEN("만료된 토큰입니다.", BAD_REQUEST.value()),
 	UNSUPPORTED_TOKEN("지원되지 않는 토큰입니다.", BAD_REQUEST.value()),
 	MISMATCH_COMMENT("해당 게시글에 등록된 댓글이 아닙니다.", BAD_REQUEST.value()),
+	VALIDATION_NOT_APPROPRIATE("정해진 정규표현식과 일치하지 않습니다.", BAD_REQUEST.value()),
 
 
 	/* 500 서버 에러 */

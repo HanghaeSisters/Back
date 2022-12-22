@@ -15,6 +15,8 @@ import com.team6.hanghaesisters.repository.PostRepository;
 import com.team6.hanghaesisters.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -99,7 +101,8 @@ public class PostService {
 
     @Transactional(readOnly = true)
     public MsgResponseDto checkHospital(String hospitalName) {
-        log.info(hospitalRepository.findByHospitalName(hospitalName).toString());
+        hospitalNameValidation(hospitalName);
+
         if (hospitalRepository.findByHospitalName(hospitalName).size() == 0) {
             return new MsgResponseDto("존재하지 않는 병원입니다.", HttpStatus.BAD_REQUEST.value());
         }else{
@@ -147,11 +150,8 @@ public class PostService {
         return commentList;
     }
 
-/*    private MsgResponseDto checkHospital(String hospitalName) {
-        if (hospitalRepository.existsByHospitalName(hospitalName) == null) {
-            return new MsgResponseDto("존재하지 않는 병원입니다.", HttpStatus.BAD_REQUEST.value());
-        }else{
-            return new MsgResponseDto("존재하는 병원입니다.", HttpStatus.OK.value());
-        }
-    }*/
+    private void hospitalNameValidation(String hospitalName) {
+        boolean name_check = Pattern.matches("^[가-힣|0-9|a-z|A-Z]+$", hospitalName);
+        if(!name_check) throw new CustomException(ErrorCode.VALIDATION_NOT_APPROPRIATE);
+    }
 }
