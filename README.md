@@ -160,7 +160,7 @@ if (!comment.getPostId().equals(postId)) {
 </details>
 
 <details>
-<summary>3. 포스트에서 예외처리가 부족하여 모든 에러에 401 토큰 예외가 발생했던 문제</summary>
+<summary>3. 포스트에서 예외처리가 부족하여 어떤 에러가 나는지 확인이 불가능했던 문제</summary>
 <br>
 <div markdown="3">
 <b>requestbody에서 값이 들어오지 않았을때의 예외 처리가 부족하여 PostDto에 @NotBalnk를 추가하는 방식으로 해결</b>  
