@@ -10,25 +10,30 @@
 <p>
 
   
-  ## 👯 팀원
+## 👯 팀원
 **김규민(팀장)**  
-<p>    
+<p>
+  
 [<img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=Github&logoColor=white">](https://github.com/starMinK)
 <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat-square&logo=springboot&logoColor=white"/>
+</p>
 
-**김소라**  
-<p>  
+**김소라**
+<p>
+  
 [<img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=Github&logoColor=white">](https://github.com/dev-rara)
 <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat-square&logo=springboot&logoColor=white"/>
+</p>
 
-**정첨백**  
-<p>  
+**정첨백**
+<p>
+  
 [<img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=Github&logoColor=white">](https://github.com/civilcoy)
 <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat-square&logo=springboot&logoColor=white"/>
-<p>  
+</p>  
   
+## 🛠️ Tech Stacks
   
-  ## 🛠️ Tech Stacks
 |종류|기술|
 |:----:|:----|
 |Language|<img src="https://img.shields.io/badge/Java-007396?style=flat-square&logo=java&logoColor=white"/>|
