@@ -31,12 +31,12 @@ public class HospitalService {
     @Value("${hospital-key}")
     private String hospitalKey;
 
-    private  Hospital getTagValue(String tag, Element eElement) {
+    private String getTagValue(String tag, Element eElement) {
         NodeList nlList = eElement.getElementsByTagName(tag).item(0).getChildNodes();
         Node nValue = nlList.item(0);
         if (nValue == null)
             return null;
-        return new Hospital(nValue.getNodeValue());
+        return nValue.getNodeValue();
     }
 
     public void saveHospitalApiData(){
@@ -61,9 +61,10 @@ public class HospitalService {
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element element = (Element) node;
 
-                    Hospital hospitalData = getTagValue("dutyName", element);
-                    log.info(":::" + hospitalData + ":::");
-                    hospitalRepository.save(hospitalData);
+                    String hospitalName = getTagValue("dutyName", element);
+                    String hospitalKey = getTagValue("hpid", element);
+//                    log.info(":::" + hospitalData + ":::");
+                    hospitalRepository.save(new Hospital(hospitalName, hospitalKey));
                 }
             }
         } catch(Exception e) {

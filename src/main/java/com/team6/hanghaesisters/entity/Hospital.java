@@ -18,7 +18,11 @@ public class Hospital {
     @Column
     private String hospitalName;
 
-    public Hospital(String hospitalName) {
+    @Column
+    private String hospitalKey;
+
+    public Hospital(String hospitalName, String hospitalKey) {
         this.hospitalName = hospitalName;
+        this.hospitalKey = hospitalKey;
     }
 }

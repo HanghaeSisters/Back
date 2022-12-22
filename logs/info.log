@@ -370,3 +370,61 @@ java.lang.IllegalArgumentException: Invalid character found in method name [0x04
 [2022-12-22 18:38:40:8589993][SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 [2022-12-22 18:38:40:8590006][SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 [2022-12-22 18:38:40:8590087][SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+[2022-12-22 18:40:03:639][background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.0.Final
+[2022-12-22 18:40:03:650][Test worker] WARN  o.s.b.t.j.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/C:/Users/gkim3/.gradle/caches/modules-2/files-2.1/org.json/json/20220924/5aa95e7688f76c664af205c5937620f02688dfbc/json-20220924.jar!/org/json/JSONObject.class
+	jar:file:/C:/Users/gkim3/.gradle/caches/modules-2/files-2.1/com.vaadin.external.google/android-json/0.0.20131108.vaadin1/fa26d351fe62a6a17f5cda1287c1c6110dec413f/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+
+[2022-12-22 18:40:03:660][Test worker] INFO  c.t.h.HanghaesistersApplicationTests - Starting HanghaesistersApplicationTests using Java 17.0.5 with PID 20012 (started by gkim3 in C:\Users\gkim3\IdeaProjects\SistersBack)
+[2022-12-22 18:40:03:661][Test worker] INFO  c.t.h.HanghaesistersApplicationTests - The following 1 profile is active: "security"
+[2022-12-22 18:40:04:1343][Test worker] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[2022-12-22 18:40:04:1406][Test worker] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 56 ms. Found 4 JPA repository interfaces.
+[2022-12-22 18:40:05:1758][Test worker] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+[2022-12-22 18:40:05:1799][Test worker] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.5.Final
+[2022-12-22 18:40:05:1931][Test worker] WARN  org.hibernate.orm.deprecation - HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+[2022-12-22 18:40:05:2022][Test worker] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+[2022-12-22 18:40:05:2429][Test worker] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@226e07e7
+[2022-12-22 18:40:05:2431][Test worker] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+[2022-12-22 18:40:05:2506][Test worker] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+[2022-12-22 18:40:06:3182][Test worker] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+[2022-12-22 18:40:06:3188][Test worker] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+[2022-12-22 18:40:07:3769][Test worker] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[2022-12-22 18:40:07:3972][Test worker] INFO  o.s.s.w.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7108b12d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7a80b2e6, org.springframework.security.web.context.SecurityContextHolderFilter@3de4f936, org.springframework.security.web.header.HeaderWriterFilter@5e78dd7f, org.springframework.web.filter.CorsFilter@394e0104, org.springframework.security.web.authentication.logout.LogoutFilter@7066c00a, com.team6.hanghaesisters.security.jwt.JwtAuthFilter@1e5f3c4a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5128efc, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4f27643d, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2aea7775, org.springframework.security.web.session.SessionManagementFilter@e62d757, org.springframework.security.web.access.ExceptionTranslationFilter@62099f75, org.springframework.security.web.access.intercept.AuthorizationFilter@664c411d]
+[2022-12-22 18:40:07:4236][Test worker] INFO  c.t.h.HanghaesistersApplicationTests - Started HanghaesistersApplicationTests in 3.888 seconds (process running for 5.335)
+[2022-12-22 18:40:07:4405][SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+[2022-12-22 18:40:07:4407][SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+[2022-12-22 18:40:07:4492][SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+[2022-12-22 20:46:02:505][background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.0.Final
+[2022-12-22 20:46:02:514][Test worker] WARN  o.s.b.t.j.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/C:/Users/gkim3/.gradle/caches/modules-2/files-2.1/org.json/json/20220924/5aa95e7688f76c664af205c5937620f02688dfbc/json-20220924.jar!/org/json/JSONObject.class
+	jar:file:/C:/Users/gkim3/.gradle/caches/modules-2/files-2.1/com.vaadin.external.google/android-json/0.0.20131108.vaadin1/fa26d351fe62a6a17f5cda1287c1c6110dec413f/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+
+[2022-12-22 20:46:02:522][Test worker] INFO  c.t.h.HanghaesistersApplicationTests - Starting HanghaesistersApplicationTests using Java 17.0.5 with PID 6384 (started by gkim3 in C:\Users\gkim3\IdeaProjects\SistersBack)
+[2022-12-22 20:46:02:523][Test worker] INFO  c.t.h.HanghaesistersApplicationTests - The following 1 profile is active: "security"
+[2022-12-22 20:46:03:986][Test worker] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[2022-12-22 20:46:03:1037][Test worker] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 45 ms. Found 4 JPA repository interfaces.
+[2022-12-22 20:46:03:1372][Test worker] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+[2022-12-22 20:46:03:1413][Test worker] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.5.Final
+[2022-12-22 20:46:03:1538][Test worker] WARN  org.hibernate.orm.deprecation - HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+[2022-12-22 20:46:03:1630][Test worker] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+[2022-12-22 20:46:04:1968][Test worker] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@226e07e7
+[2022-12-22 20:46:04:1969][Test worker] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+[2022-12-22 20:46:04:2043][Test worker] INFO  SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+[2022-12-22 20:46:05:2738][Test worker] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+[2022-12-22 20:46:05:2744][Test worker] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+[2022-12-22 20:46:05:3320][Test worker] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[2022-12-22 20:46:05:3534][Test worker] INFO  o.s.s.w.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5e537465, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4f27643d, org.springframework.security.web.context.SecurityContextHolderFilter@3af17313, org.springframework.security.web.header.HeaderWriterFilter@730a140b, org.springframework.web.filter.CorsFilter@5d267575, org.springframework.security.web.authentication.logout.LogoutFilter@5e78dd7f, com.team6.hanghaesisters.security.jwt.JwtAuthFilter@6e512d7f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@30ffc3c0, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@23b4f0a9, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2be49c8c, org.springframework.security.web.session.SessionManagementFilter@1f7653ae, org.springframework.security.web.access.ExceptionTranslationFilter@28806954, org.springframework.security.web.access.intercept.AuthorizationFilter@63069995]
+[2022-12-22 20:46:06:3810][Test worker] INFO  c.t.h.HanghaesistersApplicationTests - Started HanghaesistersApplicationTests in 3.496 seconds (process running for 5.593)
+[2022-12-22 20:46:06:3956][SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+[2022-12-22 20:46:06:3958][SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+[2022-12-22 20:46:06:4041][SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
