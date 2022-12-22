@@ -42,15 +42,10 @@
 |DB|<img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=MySQL&logoColor=white"/><br><img src="https://img.shields.io/badge/Amazon RDS-527FFF?style=flat-square&logo=Amazon RDS&logoColor=white"/>|
 |Server|<img src="https://img.shields.io/badge/Amazon EC2-FF9900?style=flat-square&logo=Amazon EC2&logoColor=white"/>
   
-## 📌 API 설계  
-<img width="800" alt="api설계1" src="https://blog.kakaocdn.net/dn/7tj8U/btrUh2KTyIc/v0XwD73QkEp9BNIAuZaEOK/img.png">
-<img width="800" alt="api설계2" src="https://blog.kakaocdn.net/dn/r7Qoa/btrUl5UdiI4/Yadm2FZ1N3KmpmQkPyH7kK/img.png">
-<img width="800" alt="api설계3" src="https://blog.kakaocdn.net/dn/NHU0R/btrUh3bZCqZ/KJ8SzuNFb7sKNlqHbgt7F1/img.png">  
-
-## 🐳 ERD 설계
+## ERD
 <img width="800" alt="메인페이지2" src="https://user-images.githubusercontent.com/65327103/209082821-ecdf919c-601a-4c36-b2d3-5d205b0414f6.png">
 
-## 💡Trouble Shooting
+## 트러블 슈팅
 <details>
 <summary>1. 거짓된 병원 정보를 입력할 수 있었던 문제</summary>
 <br>
@@ -240,16 +235,27 @@ if (!comment.getPostId().equals(postId)) {
 </details>
 
 <details>
-<summary>4. 거짓된 병원 정보를 입력할 수 있었던 문제</summary>
+<summary>4. Jwt Util 클래스 관련 에러가 발생한 문제</summary>
 <br>
 <div markdown="4">
-<b> ~~~ 방식으로 해결</b>  
-  
+<b> application properties와 jwt Util 클래스에 jwt secret key를 같은 이름으로 매치시켜주지 못해 발생한 에러였다. </b> 
+<br>
+<b> 정말 간단히 해결할 수 있었던 거지만 왜 에러가 나는지 감이 안잡혀서 생각보다 오랜 시간을 소비했던 문제였었다.</b>
+<br>
+<br>
+
 ```java
-  function square(n) {
-  return n * n;
+  public JwtUtil(@Value("${jwt.secret}") String secretKey) {
+  
 }
 ```
+
+```java
+  jwt.secret.key=7ZWt7ZW0OTntmZTsnbTtjIXtl.....=
+}
+```
+<br>
+<b>위와 아래에 jwt secret 부분을 한 곳엔 key를 붙여놨었고 한 곳엔 빼놔서 발생했던 거라 통일해주어 오류를 해결할 수 있었다.</b>
 
 </div>
 </details>
