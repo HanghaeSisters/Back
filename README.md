@@ -10,7 +10,7 @@
 <p>
 
   
-## 👯 팀원
+## 👯 팀원  
 **김규민(팀장)**  
 <p>
   
@@ -40,10 +40,18 @@
 |Build|<img src="https://img.shields.io/badge/Gralde-02303A?style=flat-square&logo=Gradle&logoColor=white"/>|
 |FrameWork|<img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat-square&logo=springboot&logoColor=white"/>|
 |DB|<img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=MySQL&logoColor=white"/><br><img src="https://img.shields.io/badge/Amazon RDS-527FFF?style=flat-square&logo=Amazon RDS&logoColor=white"/>|
-|Server|<img src="https://img.shields.io/badge/Amazon EC2-FF9900?style=flat-square&logo=Amazon EC2&logoColor=white"/>
-  
-## ERD
-<img width="800" alt="메인페이지2" src="https://user-images.githubusercontent.com/65327103/209082821-ecdf919c-601a-4c36-b2d3-5d205b0414f6.png">
+|Server|<img src="https://img.shields.io/badge/Amazon EC2-FF9900?style=flat-square&logo=Amazon EC2&logoColor=white"/>  
+
+## 📌 API 명세서
+<img width="800" alt="api1" src="https://blog.kakaocdn.net/dn/7tj8U/btrUh2KTyIc/v0XwD73QkEp9BNIAuZaEOK/img.png">  
+<img width="800" alt="api2" src="https://blog.kakaocdn.net/dn/r7Qoa/btrUl5UdiI4/Yadm2FZ1N3KmpmQkPyH7kK/img.png">  
+<img width="800" alt="api3" src="https://blog.kakaocdn.net/dn/NHU0R/btrUh3bZCqZ/KJ8SzuNFb7sKNlqHbgt7F1/img.png">  
+
+## 🗺 ERD
+<img width="800" alt="메인페이지2" src="https://user-images.githubusercontent.com/65327103/209082821-ecdf919c-601a-4c36-b2d3-5d205b0414f6.png">  
+
+## 🧩아키텍쳐
+<img width="800" alt="메인페이지2" src="https://blog.kakaocdn.net/dn/bOCbtg/btrUneCW2D2/BZyYOomTIzYOHSm4bmkEK1/img.png">  
 
 ## 트러블 슈팅
 <details>
