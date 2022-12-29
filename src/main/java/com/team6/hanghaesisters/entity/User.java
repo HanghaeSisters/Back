@@ -1,14 +1,36 @@
 package com.team6.hanghaesisters.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.team6.hanghaesisters.util.PasswordEncConverter;
+import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Entity
+
+@Getter
+@NoArgsConstructor
+@Entity(name = "USERS")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, unique = true)
+    private String username;
+
+    @Convert(converter = PasswordEncConverter.class)
+    @Column(nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private UserRole role;
+
+    @Builder
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+        this.role = UserRole.USER;
+    }
 }
